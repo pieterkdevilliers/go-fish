@@ -103,7 +103,18 @@ def deal_cards(deck_size):
         print(selected_card_position)
         selected_card = full_deck[selected_card_position]
         print(selected_card)
+        full_deck.pop(int(selected_card_position))
+        print("The deck Size is:\n")
+        print(len(full_deck))
+        add_card_to_player_hand(selected_card)
         i += 1
+
+def add_card_to_player_hand(selected_card):
+    """
+    Adds the selected card to the player_hand list.
+    """
+    player_hand.append(selected_card)
+    print(player_hand)
 
 
 def count_cards_in_deck():
