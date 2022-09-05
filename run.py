@@ -92,9 +92,18 @@ def deal_cards():
     This will remove them from the full_deck list and add 7 cards to the player_hand
     list and 7 cards to the computer_hand list
     """
-    print("cards are being dealt")
+    print("\nCards are being dealt")
 
+def count_cards_in_deck():
+    print(len(full_deck))
+    
 
-request_player_name()
+def main():
+    """
+    Runs the main functions of the game.
+    """
+    request_player_name()
+    explain_game_rules()
+    count_cards_in_deck()
 
-explain_game_rules()
+main()
