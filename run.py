@@ -86,6 +86,14 @@ def explain_game_rules():
     else:
         player_status = input("If you are ready to begine, type GO! below:\n")
 
+def deal_cards():
+    """
+    Deals the cards by randomly selecting 7 cards for the Player and 7 cards for the computer.
+    This will remove them from the full_deck list and add 7 cards to the player_hand
+    list and 7 cards to the computer_hand list
+    """
+    print("cards are being dealt")
+
 
 request_player_name()
 
