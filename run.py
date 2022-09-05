@@ -98,25 +98,36 @@ def deal_cards(deck_size):
     print(f"Deck size is: {deck_size}")
 
     i = 1
-    while i <= 7:
-        selected_card_position = random.randint(0, (deck_size - 1))
+    while i <= 14:
+        selected_card_position = random.randint(0, (len(full_deck)))
         print(selected_card_position)
         selected_card = full_deck[selected_card_position]
         print(selected_card)
         full_deck.pop(int(selected_card_position))
         print("The deck Size is:")
         print(len(full_deck))
-        print("Adding card to player hand\n")
-        add_card_to_player_hand(selected_card)
-        i += 1
+
+        if i % 2 != 1:
+            add_card_to_player_hand(selected_card)
+            i += 1
+        
+        else:
+            add_card_to_computer_hand(selected_card)
+            i += 1
 
 def add_card_to_player_hand(selected_card):
     """
     Adds the selected card to the player_hand list.
     """
     player_hand.append(selected_card)
-    print("Card added to player hand\n")
     print(player_hand)
+
+def add_card_to_computer_hand(selected_card):
+    """
+    Adds the selected card to the computer_hand list.
+    """
+    computer_hand.append(selected_card)
+    print(computer_hand)
 
 
 def count_cards_in_deck():
