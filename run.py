@@ -3,7 +3,8 @@
 Declare initial required lists to start the game, creating the full deck
 and the empty hands for the two players.
 """
-full_deck = ["Ace of Hearts",
+full_deck = [
+            "Ace of Hearts",
             "2 of Hearts",
             "3 of Hearts",
             "4 of Hearts",
@@ -54,17 +55,38 @@ full_deck = ["Ace of Hearts",
             "10-Spades",
             "Jack-Spades",
             "Queen-Spades",
-            "King-Spades"]
+            "King-Spades"
+            ]
 player_hand = []
 computer_hand = []
 
 def request_player_name():
+    """
+    Requests the players name in order to start the game.
+    """
     while True:
         print("To start the game, please enter your name:\n")
 
         player_name = input("Enter your name:\n")
         print(f"Welcome {player_name}!\n")
-        print(full_deck)
         return player_name
 
+def explain_game_rules():
+    """
+    Explain the rules of the game, and get user to start the game, when ready.
+    """
+    print("Here are the rules of the game:\n")
+    print("Rule 1\n")
+    print("Rule 2\n")
+    print("Rule 3\n")
+
+    player_status = input("If you are ready to begine, type GO! below:\n")
+    if player_status == "GO!":
+        deal_cards()
+    else:
+        player_status = input("If you are ready to begine, type GO! below:\n")
+
+
 request_player_name()
+
+explain_game_rules()
