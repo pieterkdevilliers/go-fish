@@ -82,7 +82,7 @@ def explain_game_rules():
     print("Rule 2\n")
     print("Rule 3\n")
 
-    player_status = input("If you are ready to begine, type GO! below:\n")
+    player_status = input("If you are ready to begin, type GO! below:\n")
     if player_status == "GO!":
         count_cards_in_deck()
     else:
@@ -99,13 +99,9 @@ def deal_cards(deck_size):
 
     i = 1
     while i <= 14:
-        selected_card_position = random.randint(0, (len(full_deck)))
-        print(selected_card_position)
+        selected_card_position = random.randint(0, (len(full_deck) - 1))
         selected_card = full_deck[selected_card_position]
-        print(selected_card)
         full_deck.pop(int(selected_card_position))
-        print("The deck Size is:")
-        print(len(full_deck))
 
         if i % 2 != 1:
             add_card_to_player_hand(selected_card)
@@ -120,14 +116,12 @@ def add_card_to_player_hand(selected_card):
     Adds the selected card to the player_hand list.
     """
     player_hand.append(selected_card)
-    print(player_hand)
 
 def add_card_to_computer_hand(selected_card):
     """
     Adds the selected card to the computer_hand list.
     """
     computer_hand.append(selected_card)
-    print(computer_hand)
 
 
 def count_cards_in_deck():
@@ -141,5 +135,10 @@ def main():
     """
     request_player_name()
     explain_game_rules()
+    print("The cards in the player's hand:\n")
+    print(player_hand)
+    print("\n")
+    print("The cards in the computer's hand:\n")
+    print(computer_hand)
 
 main()
