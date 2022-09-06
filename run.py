@@ -1,6 +1,7 @@
 # Importing required dependencies.
 
 import random
+import itertools
 
 
 # Declare initial required lists to start the game, creating the full deck
@@ -153,26 +154,22 @@ def select_next_card():
     deck.pop(int(selected_card_position))
     return selected_card
 
-def pull_cards_test(selected_card):
+def request_card():
     """
-    Allows for user selection of the next player, in order to test cards pulled from the deck.
+    Determines if the computer holds the requested card, and returns the card's index if True.
     """
-    while int(len(deck)) > 0:
+    print(computer_hand)
+    requested_card = input("Which card do you want to request?\n")
+    print(requested_card)
+    
+    card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
+    print(card_check)
 
-        next_player = input("user or computer next?")
-
-        if next_player == "user":
-            print("You chose user as the next player")
-            add_card_to_player_hand(pull_card_from_deck("user"))
-            print(player_hand)
-
-        elif next_player == "computer":
-            print("You chose user as the next player")
-            add_card_to_computer_hand(pull_card_from_deck("computer"))
-            print(computer_hand)
-
-        else:
-            print("That is not an option")
+    if card_check == "True":
+        result = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+        print(result)
+    else:
+        print("I don't have that card")
 
 
 def main():
@@ -182,18 +179,14 @@ def main():
 
     request_player_name()
     explain_game_rules()
+    print("\n")
+    active_player = "User"
+    print("\nCurrent Active Player is:")
+    print(active_player)
     print("\nThe cards in the player's hand:")
     print(player_hand)
-    print("\n")
-    print("The cards in the computer's hand:")
-    print(computer_hand)
-    print(len(deck))
-    active_player = "user"
-    print("\nCurrent Active Player:")
-    print(active_player)
+    request_card()
 
 # Start main game running
 
 main()
-
-pull_cards_test(select_next_card())
