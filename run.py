@@ -168,10 +168,24 @@ def request_card():
     if card_check == True:
         requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
         print(requested_card_index)
+        hand_over_requested_card(requested_card_index)
+        
     else:
         print("I don't have that card, take another card from the deck")
         add_card_to_player_hand(pull_card_from_deck("user"))
         print(player_hand)
+
+def hand_over_requested_card(requested_card_index):
+    """
+    Receives the requested card's index and moves it from the computer_hand to the player_hand
+    """
+    requested_card = computer_hand[requested_card_index]
+    computer_hand.pop(int(requested_card_index))
+    add_card_to_player_hand(requested_card)
+    print("The cards in the computer's hand:\n")
+    print(computer_hand)
+    print("\nThe cards in the player's hand\n")
+    print(player_hand)
 
 
 def main():
@@ -188,6 +202,7 @@ def main():
     print("\nThe cards in the player's hand:")
     print(player_hand)
     request_card()
+    # hand_over_requested_card(requested_card_index)
 
 # Start main game running
 
