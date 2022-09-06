@@ -161,15 +161,17 @@ def request_card():
     print(computer_hand)
     requested_card = input("Which card do you want to request?\n")
     print(requested_card)
-    
+
     card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
     print(card_check)
 
-    if card_check == "True":
-        result = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-        print(result)
+    if card_check == True:
+        requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+        print(requested_card_index)
     else:
-        print("I don't have that card")
+        print("I don't have that card, take another card from the deck")
+        add_card_to_player_hand(pull_card_from_deck("user"))
+        print(player_hand)
 
 
 def main():
