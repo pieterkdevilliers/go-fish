@@ -2,6 +2,7 @@
 
 import random
 import itertools
+import re
 
 
 # Declare initial required lists to start the game, creating the full deck
