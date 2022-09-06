@@ -263,4 +263,17 @@ def main():
 
 # Start main game running
 
-main()
+# main()
+
+def 
+user_hand = ["2 of hearts", "2 of Diamonds", "2 of Clubs", "2 of Spades", "6 of hearts", "5 of Diamonds", "4 of Clubs", "3 of Spades"]
+user_foak = []
+user_table = []
+
+user_foak.append(user_hand[0])
+print(user_foak)
+user_foak.append(user_hand[1])
+print(user_foak)
+user_table.append(user_foak)
+print(user_table)
+print(user_table[0])
