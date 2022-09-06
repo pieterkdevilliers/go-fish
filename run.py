@@ -266,15 +266,39 @@ def main():
 
 # main()
 
-def 
-user_hand = ["2 of hearts", "2 of Diamonds", "2 of Clubs", "2 of Spades", "6 of hearts", "5 of Diamonds", "4 of Clubs", "3 of Spades"]
-user_foak = []
-user_table = []
 
-user_foak.append(user_hand[0])
+user_foak = []
+user_table = {
+    "1": ['1 of hearts', '1 of Diamonds', '1 of Clubs', '1 of Spades']
+}
+
+def confirm_user_foak(requested_card):
+    """
+    Determines if foak is full, if so, adds foak list to table and clears foak.
+    """
+    if len(user_foak) == 4:
+        user_table[requested_card] = user_foak.copy()
+        user_foak.clear()
+    else:
+        user_foak.clear()
+
+
+user_hand = ["2 of hearts", "2 of Diamonds", "2 of Clubs", "2 of Spades", "6 of hearts", "5 of Diamonds", "5 of Clubs", "3 of Spades"]
+
+def check_user_hand_for_foak(requested_card):
+    """
+    Updates foak list with request card matches from user's hand and adds to the temp foak list.
+    """
+    for i, elem in enumerate(user_hand):
+        if requested_card in elem:
+            user_foak.append(user_hand[i])
+
+request_reference = "2"
+check_user_hand_for_foak(request_reference)        
 print(user_foak)
-user_foak.append(user_hand[1])
+confirm_user_foak(request_reference)
+
 print(user_foak)
-user_table.append(user_foak)
+print(len(user_foak))
 print(user_table)
-print(user_table[0])
+print(len(user_table))
