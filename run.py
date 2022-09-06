@@ -64,6 +64,9 @@ deck = [
             ]
 user_hand = []
 computer_hand = []
+user_foak = []
+computer_foak = []
+
 
 def request_player_name():
     """
