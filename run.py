@@ -182,8 +182,9 @@ def request_card(active_player):
     else:
         print("\nThe cards in the user's hand:")
         print(user_hand)
-        requested_card = input("\nWhich card do you want to request?(You are playing as the COMPUTER)\n")
-        print(requested_card)
+        # requested_card = input("\nWhich card do you want to request?(You are playing as the COMPUTER)\n")
+        requested_card = determine_computer_request_value()
+        print(f"The card requested by the computer was: {requested_card}")
 
         card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
         print(card_check)
@@ -235,16 +236,21 @@ def switch_active_player(active_player):
         print(active_player)
         return active_player
 
+def determine_computer_request_value():
+    computer_requested_card_position = random.randint(0, (len(computer_hand) - 1))
+    computer_requested_card = computer_hand[computer_requested_card_position]
+    computer_request_value = computer_requested_card.split(maxsplit=1)
+    return (computer_request_value[0])
+
 
 def main():
     """
     Runs the main functions of the game.
     """
-
     request_player_name()
     explain_game_rules()
     print("\n")
-    active_player = "Computer"
+    active_player = "User"
     print("\nCurrent Active Player is:")
     print(active_player)
     request_card(active_player)
