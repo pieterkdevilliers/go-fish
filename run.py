@@ -237,6 +237,9 @@ def switch_active_player(active_player):
         return active_player
 
 def determine_computer_request_value():
+    """
+    Determines the card value the computer is asking the user for. 
+    """
     computer_requested_card_position = random.randint(0, (len(computer_hand) - 1))
     computer_requested_card = computer_hand[computer_requested_card_position]
     computer_request_value = computer_requested_card.split(maxsplit=1)
