@@ -62,12 +62,12 @@ deck = [
             "Queen of Spades",
             "King of Spades"
             ]
-player_hand = []
+user_hand = []
 computer_hand = []
 
 def request_player_name():
     """
-    Requests the players name in order to start the game.
+    Requests the user's name in order to start the game.
     """
     while True:
         print("To start the game, please enter your name:\n")
@@ -93,12 +93,11 @@ def explain_game_rules():
 
 def deal_cards(deck_size):
     """
-    Deals the cards by randomly selecting 7 cards for the Player and 7 cards for the computer.
-    This will remove them from the deck list and add 7 cards to the player_hand
+    Deals the cards by randomly selecting 7 cards for the user and 7 cards for the computer.
+    This will remove them from the deck list and add 7 cards to the user_hand
     list and 7 cards to the computer_hand list
     """
     print("\nCards are being dealt\n")
-    print(f"Starting deck size is: {deck_size}")
 
     i = 1
     while i <= 14:
@@ -107,7 +106,7 @@ def deal_cards(deck_size):
         deck.pop(int(selected_card_position))
 
         if i % 2 != 1:
-            add_card_to_player_hand(selected_card)
+            add_card_to_user_hand(selected_card)
             i += 1
         
         else:
@@ -125,11 +124,11 @@ def pull_card_from_deck(active_player):
     print(f"Selected card from pull card function was {selected_card}")
     return selected_card
 
-def add_card_to_player_hand(selected_card):
+def add_card_to_user_hand(selected_card):
     """
-    Adds the selected card to the player_hand list.
+    Adds the selected card to the user_hand list.
     """
-    player_hand.append(selected_card)
+    user_hand.append(selected_card)
 
 def add_card_to_computer_hand(selected_card):
     """
@@ -154,38 +153,87 @@ def select_next_card():
     deck.pop(int(selected_card_position))
     return selected_card
 
-def request_card():
+def request_card(active_player):
     """
-    Determines if the computer holds the requested card, and returns the card's index if True.
+    Determines if the opponent holds the requested card, and returns the card's index if True.
     """
-    print(computer_hand)
-    requested_card = input("Which card do you want to request?\n")
-    print(requested_card)
 
-    card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
-    print(card_check)
+    if active_player == "User":
+        print("\nThe cards in the computer's hand:")
+        print(computer_hand)
+        requested_card = input("\nWhich card do you want to request?(You are playing as the USER)\n")
+        print(requested_card)
 
-    if card_check == True:
-        requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-        print(requested_card_index)
-        hand_over_requested_card(requested_card_index)
-        
+        card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
+        print(card_check)
+
+        if card_check == True:
+            requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+            print(requested_card_index)
+            hand_over_requested_card(requested_card_index, active_player)
+            request_card(active_player)
+            
+        else:
+            print("I don't have that card, take another card from the deck")
+            add_card_to_user_hand(pull_card_from_deck("user"))
+            print(user_hand)
+            active_player = switch_active_player(active_player)
+            request_card(active_player)
     else:
-        print("I don't have that card, take another card from the deck")
-        add_card_to_player_hand(pull_card_from_deck("user"))
-        print(player_hand)
+        print("\nThe cards in the user's hand:")
+        print(user_hand)
+        requested_card = input("\nWhich card do you want to request?(You are playing as the COMPUTER)\n")
+        print(requested_card)
 
-def hand_over_requested_card(requested_card_index):
+        card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
+        print(card_check)
+
+        if card_check == True:
+            requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
+            print(requested_card_index)
+            hand_over_requested_card(requested_card_index, active_player)
+            request_card(active_player)
+            
+        else:
+            print("I don't have that card, take another card from the deck")
+            add_card_to_computer_hand(pull_card_from_deck("computer"))
+            print(computer_hand)
+            active_player = switch_active_player(active_player)
+            request_card(active_player)
+
+def hand_over_requested_card(requested_card_index, active_player):
     """
-    Receives the requested card's index and moves it from the computer_hand to the player_hand
+    Receives the requested card's index and moves it from the computer_hand to the user_hand
     """
-    requested_card = computer_hand[requested_card_index]
-    computer_hand.pop(int(requested_card_index))
-    add_card_to_player_hand(requested_card)
-    print("The cards in the computer's hand:\n")
-    print(computer_hand)
-    print("\nThe cards in the player's hand\n")
-    print(player_hand)
+    if active_player == "User":
+        requested_card = computer_hand[requested_card_index]
+        computer_hand.pop(int(requested_card_index))
+        add_card_to_user_hand(requested_card)
+        print("The cards in the computer's hand:")
+        print(computer_hand)
+        print("\nThe cards in the user's hand:")
+        print(user_hand)
+    else:
+        requested_card = user_hand[requested_card_index]
+        user_hand.pop(int(requested_card_index))
+        add_card_to_computer_hand(requested_card)
+        print("The cards in the computer's hand:")
+        print(computer_hand)
+        print("\nThe cards in the user's hand:")
+        print(user_hand)
+
+def switch_active_player(active_player):
+    """
+    Switches the active player beased on the existing active player, to change turns
+    """
+    if active_player == "User":
+        active_player = "Computer"
+        print(active_player)
+        return active_player
+    else:
+        active_player = "User"
+        print(active_player)
+        return active_player
 
 
 def main():
@@ -196,13 +244,10 @@ def main():
     request_player_name()
     explain_game_rules()
     print("\n")
-    active_player = "User"
+    active_player = "Computer"
     print("\nCurrent Active Player is:")
     print(active_player)
-    print("\nThe cards in the player's hand:")
-    print(player_hand)
-    request_card()
-    # hand_over_requested_card(requested_card_index)
+    request_card(active_player)
 
 # Start main game running
 
