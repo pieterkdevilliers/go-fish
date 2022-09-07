@@ -164,14 +164,12 @@ def request_card(active_player):
     """
     Determines if the opponent holds the requested card, and returns the card's index if True.
     """
-    print(f"The active player is: {active_player}\n")
-    print(f"The user's cards are: {user_hand}")
-    print(f"The user's table holds: {user_table}")
-    print(f"The computer's cards are: {computer_hand}")
-    print(f"The computer's table holds: {computer_table}")
-
     if active_player == "User":
-        requested_card = input("\nWhich card do you want to request?(You are playing as the USER)\n")
+        print("It is your turn.\n")
+        print("\n")
+        print("You hold these cards in your hand:\n")
+        print(user_hand)
+        requested_card = input("\nWhich card do you want to request?\n")
         card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
         if card_check == True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
@@ -181,13 +179,16 @@ def request_card(active_player):
             request_card(active_player)
             
         else:
-            print("\nI don't have that card, take another card from the deck\n")
+            print("\nThe Computer doesn't have that card, take another card from the deck\n")
             add_card_to_user_hand(pull_card_from_deck("user"))
             active_player = switch_active_player(active_player)
             request_card(active_player)
     else:
         requested_card = determine_computer_request_value()
+        print("The Computer is choosing a card to request\n")
+        time.sleep(2)
         print(f"The card requested by the computer was: {requested_card}")
+        time.sleep(1)
 
         card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
 
@@ -199,7 +200,8 @@ def request_card(active_player):
             request_card(active_player)
             
         else:
-            print("\nYou didn't have that card, the computer took another card from the deck\n")
+            print("\nYou didn't have that card, the computer is taking another card from the deck\n")
+            time.sleep(1)
             add_card_to_computer_hand(pull_card_from_deck("computer"))
             active_player = switch_active_player(active_player)
             request_card(active_player)
@@ -209,10 +211,14 @@ def hand_over_requested_card(requested_card_index, active_player):
     Receives the requested card's index and moves it from the computer_hand to the user_hand
     """
     if active_player == "User":
+        print("\nThe computer is handing over the card you requested\n")
+        time.sleep(1)
         requested_card = computer_hand[requested_card_index]
         computer_hand.pop(int(requested_card_index))
         add_card_to_user_hand(requested_card)
     else:
+        print("\nYou are handing over the card the Computer requested\n")
+        time.sleep(1)
         requested_card = user_hand[requested_card_index]
         user_hand.pop(int(requested_card_index))
         add_card_to_computer_hand(requested_card)
@@ -223,6 +229,8 @@ def switch_active_player(active_player):
     """
     if active_player == "User":
         active_player = "Computer"
+        print("\nIt is now the Computer's turn")
+        time.sleep(1)
         return active_player
     else:
         active_player = "User"
@@ -276,6 +284,9 @@ def confirm_user_foak(requested_card):
     """
     if len(user_foak) == 4:
         user_table[requested_card] = user_foak.copy()
+        print("\nCongratulations! You have a Four Of A King\n")
+        print("\nYour Four Of A Kinds Are:\n")
+        print(user_table)
         user_foak.clear()
     else:
         user_foak.clear()
@@ -287,6 +298,9 @@ def confirm_computer_foak(requested_card):
     """
     if len(computer_foak) == 4:
         computer_table[requested_card] = computer_foak.copy()
+        print("\nThe Computer has a Four Of A King\n")
+        print("\nThe Computer's Four Of A Kinds Are:\n")
+        print(computer_table)
         computer_foak.clear()
     else:
         computer_foak.clear()
@@ -300,8 +314,6 @@ def main():
     explain_game_rules()
     print("\n")
     active_player = "User"
-    print("\nCurrent Active Player is:")
-    print(active_player)
     request_card(active_player)
 
 # Start main game running
