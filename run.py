@@ -3,6 +3,7 @@
 import random
 import itertools
 import re
+import time
 
 
 # Declare initial required lists to start the game, creating the full deck
@@ -67,6 +68,8 @@ user_hand = []
 computer_hand = []
 user_foak = []
 computer_foak = []
+user_table = {}
+computer_table = {}
 
 
 def request_player_name():
@@ -169,40 +172,49 @@ def request_card(active_player):
         print(requested_card)
 
         card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
-        print(card_check)
 
         if card_check == True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-            print(requested_card_index)
+            print("handing over requested card\n")
+            time.sleep(1)
             hand_over_requested_card(requested_card_index, active_player)
+            print("checking user hand for foak\n")
+            time.sleep(1)
+            check_user_hand_for_foak(requested_card) # Part of the foak check process
+            print("clearing user foak\n")
+            time.sleep(1)
+            user_foak.clear() # Part of the foak check process
             request_card(active_player)
             
         else:
             print("I don't have that card, take another card from the deck")
             add_card_to_user_hand(pull_card_from_deck("user"))
-            print(user_hand)
             active_player = switch_active_player(active_player)
             request_card(active_player)
     else:
         print("\nThe cards in the user's hand:")
         print(user_hand)
-        # requested_card = input("\nWhich card do you want to request?(You are playing as the COMPUTER)\n")
         requested_card = determine_computer_request_value()
         print(f"The card requested by the computer was: {requested_card}")
 
         card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
-        print(card_check)
 
         if card_check == True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
-            print(requested_card_index)
+            print("handing over requested card\n")
+            time.sleep(1)
             hand_over_requested_card(requested_card_index, active_player)
+            print("checking computer hand for foak\n")
+            time.sleep(1)
+            check_computer_hand_for_foak(requested_card) # Part of the foak check process
+            print("clearing computer foak\n")
+            time.sleep(1)
+            computer_foak.clear() # Part of the foak check process
             request_card(active_player)
             
         else:
             print("I don't have that card, take another card from the deck")
             add_card_to_computer_hand(pull_card_from_deck("computer"))
-            print(computer_hand)
             active_player = switch_active_player(active_player)
             request_card(active_player)
 
@@ -250,6 +262,57 @@ def determine_computer_request_value():
     return (computer_request_value[0])
 
 
+def check_user_hand_for_foak(requested_card):
+    """
+    Updates foak list with request card matches from user's
+    hand and adds to the temp foak list.
+    """
+    for i, elem in enumerate(user_hand):
+        if requested_card in elem:
+            user_foak.append(user_hand[i])
+    print("confirming user foak\n")
+    time.sleep(1)        
+    confirm_user_foak(requested_card)
+
+def check_computer_hand_for_foak(requested_card):
+    """
+    Updates foak list with request card matches from computer's
+    hand and adds to the temp foak list.
+    """
+    for i, elem in enumerate(computer_hand):
+        if requested_card in elem:
+            computer_foak.append(computer_hand[i])
+    print("confirming computer foak\n")
+    time.sleep(1)          
+    confirm_computer_foak(requested_card)
+
+
+def confirm_user_foak(requested_card):
+    """
+    Determines if user foak is full, if so, adds foak list to table and clears foak.
+    """
+    if len(user_foak) == 4:
+        print("adding user foak to user table\n")
+        time.sleep(1)  
+        user_table[requested_card] = user_foak.copy()
+        user_foak.clear()
+    else:
+        user_foak.clear()
+
+
+def confirm_computer_foak(requested_card):
+    """
+    Determines if computer foak is full, if so, adds foak list to table and clears foak.
+    """
+    if len(computer_foak) == 4:
+        print("adding computer foak to computer table\n")
+        time.sleep(1)  
+        computer_table[requested_card] = computer_foak.copy()
+        computer_foak.clear()
+    else:
+        computer_foak.clear()
+
+
 def main():
     """
     Runs the main functions of the game.
@@ -264,41 +327,4 @@ def main():
 
 # Start main game running
 
-# main()
-
-
-user_foak = []
-user_table = {
-    "1": ['1 of hearts', '1 of Diamonds', '1 of Clubs', '1 of Spades']
-}
-
-def confirm_user_foak(requested_card):
-    """
-    Determines if foak is full, if so, adds foak list to table and clears foak.
-    """
-    if len(user_foak) == 4:
-        user_table[requested_card] = user_foak.copy()
-        user_foak.clear()
-    else:
-        user_foak.clear()
-
-
-user_hand = ["2 of hearts", "2 of Diamonds", "2 of Clubs", "2 of Spades", "6 of hearts", "5 of Diamonds", "5 of Clubs", "3 of Spades"]
-
-def check_user_hand_for_foak(requested_card):
-    """
-    Updates foak list with request card matches from user's hand and adds to the temp foak list.
-    """
-    for i, elem in enumerate(user_hand):
-        if requested_card in elem:
-            user_foak.append(user_hand[i])
-
-request_reference = "2"
-check_user_hand_for_foak(request_reference)        
-print(user_foak)
-confirm_user_foak(request_reference)
-
-print(user_foak)
-print(len(user_foak))
-print(user_table)
-print(len(user_table))
+main()
