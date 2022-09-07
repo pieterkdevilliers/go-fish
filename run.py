@@ -251,9 +251,13 @@ def determine_pulled_card_value(selected_card, active_player):
     """
     pulled_card_value = selected_card.split(maxsplit=1)
     if active_player == "user":
+        print("Checking the user hand for foak after pulling a card from deck")
+        time.sleep(1)
         check_user_hand_for_foak(str(pulled_card_value))
     else:
         check_computer_hand_for_foak(str(pulled_card_value))
+        print("Checking the computer hand for foak after pulling a card from deck")
+        time.sleep(1)
     return (pulled_card_value[0])
 
 
@@ -287,10 +291,23 @@ def confirm_user_foak(requested_card):
         print("\nCongratulations! You have a Four Of A King\n")
         print("\nYour Four Of A Kinds Are:\n")
         print(user_table)
+        delete_foak_from_user_hand(requested_card)
         user_foak.clear()
     else:
         user_foak.clear()
 
+def delete_foak_from_user_hand(requested_card):
+    """
+    Identifies and removes the foak cards from the user_hand after they were added to the user_table
+    """
+    for i, elem in enumerate(user_hand):
+        if requested_card in elem:
+            print("Identifying foak user_hand index\n")
+            time.sleep(1)
+            foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
+            print(f"Deleting identified foak_index: {foak_card_index}")
+            user_hand.pop(user_hand[(int(foak_card_index))])
+            print("Deleting foak from user_hand\n")  
 
 def confirm_computer_foak(requested_card):
     """
@@ -301,9 +318,23 @@ def confirm_computer_foak(requested_card):
         print("\nThe Computer has a Four Of A King\n")
         print("\nThe Computer's Four Of A Kinds Are:\n")
         print(computer_table)
+        delete_foak_from_computer_hand(requested_card)
         computer_foak.clear()
     else:
         computer_foak.clear()
+
+def delete_foak_from_computer_hand(requested_card):
+    """
+    Identifies and removes the foak cards from the computer_hand after they were added to the computer_table
+    """
+    for i, elem in enumerate(computer_hand):
+        if requested_card in elem:
+            print("Identifying foak computer_hand index\n")
+            time.sleep(1)
+            foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+            print(f"Deleting identified foak_index: {foak_card_index}")
+            computer_hand.pop(computer_hand[(int(foak_card_index))])
+            print("Deleting foak from computer_hand\n")   
 
 
 def main():
