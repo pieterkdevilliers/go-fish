@@ -164,6 +164,11 @@ def request_card(active_player):
     """
     Determines if the opponent holds the requested card, and returns the card's index if True.
     """
+    print(f"The active player is: {active_player}\n")
+    print(f"The user's cards are: {user_hand}")
+    print(f"The user's table holds: {user_table}")
+    print(f"The computer's cards are: {computer_hand}")
+    print(f"The computer's table holds: {computer_table}")
 
     if active_player == "User":
         requested_card = input("\nWhich card do you want to request?(You are playing as the USER)\n")
@@ -194,7 +199,7 @@ def request_card(active_player):
             request_card(active_player)
             
         else:
-            print("\nI don't have that card, take another card from the deck\n")
+            print("\nYou didn't have that card, the computer took another card from the deck\n")
             add_card_to_computer_hand(pull_card_from_deck("computer"))
             active_player = switch_active_player(active_player)
             request_card(active_player)
