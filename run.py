@@ -129,6 +129,7 @@ def pull_card_from_deck(active_player):
     deck.pop(int(selected_card_position))
     print(len(deck))
     print(f"Selected card from pull card function was {selected_card}")
+    determine_pulled_card_value(selected_card, active_player)
     return selected_card
 
 def add_card_to_user_hand(selected_card):
@@ -260,6 +261,20 @@ def determine_computer_request_value():
     computer_requested_card = computer_hand[computer_requested_card_position]
     computer_request_value = computer_requested_card.split(maxsplit=1)
     return (computer_request_value[0])
+
+def determine_pulled_card_value(selected_card, active_player):
+    """
+    Determines the card value of the new card drawn from the deck. 
+    """
+    pulled_card_value = selected_card.split(maxsplit=1)
+    print("The pulled card value was determined as:")
+    print(pulled_card_value[0])
+    print(f"The active player is {active_player}")
+    if active_player == "user":
+        check_user_hand_for_foak(str(pulled_card_value))
+    else:
+        check_computer_hand_for_foak(str(pulled_card_value))
+    return (pulled_card_value[0])
 
 
 def check_user_hand_for_foak(requested_card):
