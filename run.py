@@ -253,11 +253,15 @@ def determine_pulled_card_value(selected_card, active_player):
     if active_player == "user":
         print("Checking the user hand for foak after pulling a card from deck")
         time.sleep(1)
-        check_user_hand_for_foak(str(pulled_card_value))
+        print(f"The card pulled from the deck was: {pulled_card_value[0]}")
+        time.sleep(1)
+        check_user_hand_for_foak(str(pulled_card_value[0]))
     else:
-        check_computer_hand_for_foak(str(pulled_card_value))
         print("Checking the computer hand for foak after pulling a card from deck")
         time.sleep(1)
+        print(f"The card pulled from the deck was: {pulled_card_value[0]}")
+        time.sleep(1)
+        check_computer_hand_for_foak(str(pulled_card_value[0]))
     return (pulled_card_value[0])
 
 
