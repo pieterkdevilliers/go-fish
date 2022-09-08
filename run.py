@@ -291,12 +291,12 @@ def confirm_user_foak(requested_card):
         print("\nCongratulations! You have a Four Of A King\n")
         print("\nYour Four Of A Kinds Are:\n")
         print(user_table)
-        delete_foak_from_user_hand(requested_card)
+        identify_foak_index_from_user_hand(requested_card)
         user_foak.clear()
     else:
         user_foak.clear()
 
-def delete_foak_from_user_hand(requested_card):
+def identify_foak_index_from_user_hand(requested_card):
     """
     Identifies and removes the foak cards from the user_hand after they were added to the user_table
     """
@@ -306,8 +306,15 @@ def delete_foak_from_user_hand(requested_card):
             time.sleep(1)
             foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
             print(f"Deleting identified foak_index: {foak_card_index}")
-            user_hand.pop(user_hand[(int(foak_card_index))])
-            print("Deleting foak from user_hand\n")  
+            delete_foak_from_user_hand(foak_card_index)
+
+
+def delete_foak_from_user_hand(foak_card_index):
+    """
+    Deletes identified foak card from user_hand
+    """
+    user_hand.pop(int(foak_card_index))
+
 
 def confirm_computer_foak(requested_card):
     """
@@ -318,12 +325,12 @@ def confirm_computer_foak(requested_card):
         print("\nThe Computer has a Four Of A King\n")
         print("\nThe Computer's Four Of A Kinds Are:\n")
         print(computer_table)
-        delete_foak_from_computer_hand(requested_card)
+        identify_foak_index_from_computer_hand(requested_card)
         computer_foak.clear()
     else:
         computer_foak.clear()
 
-def delete_foak_from_computer_hand(requested_card):
+def identify_foak_index_from_computer_hand(requested_card):
     """
     Identifies and removes the foak cards from the computer_hand after they were added to the computer_table
     """
@@ -333,8 +340,14 @@ def delete_foak_from_computer_hand(requested_card):
             time.sleep(1)
             foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
             print(f"Deleting identified foak_index: {foak_card_index}")
-            computer_hand.pop(computer_hand[(int(foak_card_index))])
-            print("Deleting foak from computer_hand\n")   
+            delete_foak_from_computer_hand(foak_card_index)
+
+
+def delete_foak_from_computer_hand(foak_card_index):
+    """
+    Deletes identified foak card from computer_hand
+    """
+    computer_hand.pop(int(foak_card_index))            
 
 
 def main():
