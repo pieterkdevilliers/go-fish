@@ -83,6 +83,7 @@ def request_player_name():
         print(f"Welcome {player_name}!\n")
         return player_name
 
+
 def explain_game_rules():
     """
     Explain the rules of the game, and get user to start the game, when ready.
@@ -97,6 +98,7 @@ def explain_game_rules():
         count_cards_in_deck()
     else:
         player_status = input("That command is not recognised. In order to start the game type GO! below:\n")
+
 
 def deal_cards(deck_size):
     """
@@ -121,6 +123,7 @@ def deal_cards(deck_size):
             add_card_to_computer_hand(selected_card)
             i += 1
 
+
 def pull_card_from_deck(active_player):
     """
     Pulls a card from the deck to add it to the active user hand.
@@ -128,20 +131,24 @@ def pull_card_from_deck(active_player):
     selected_card_position = random.randint(0, (len(deck) - 1))
     selected_card = deck[selected_card_position]
     deck.pop(int(selected_card_position))
-    determine_pulled_card_value(selected_card, active_player)
+    pulled_card_value = determine_pulled_card_value(selected_card)
     return selected_card
+
 
 def add_card_to_user_hand(selected_card):
     """
     Adds the selected card to the user_hand list.
     """
-    user_hand.append(selected_card)
+    pulled_card_value = user_hand.append(selected_card)
+    return pulled_card_value
+
 
 def add_card_to_computer_hand(selected_card):
     """
     Adds the selected card to the computer_hand list.
     """
-    computer_hand.append(selected_card)
+    pulled_card_value = computer_hand.append(selected_card)
+    return pulled_card_value
 
 
 def count_cards_in_deck():
@@ -151,6 +158,7 @@ def count_cards_in_deck():
     num_cards_in_deck = len(deck)
     deal_cards(num_cards_in_deck)
 
+
 def select_next_card():
     """
     Identifies the next card to use out of the deck
@@ -159,6 +167,7 @@ def select_next_card():
     selected_card = deck[selected_card_position]
     deck.pop(int(selected_card_position))
     return selected_card
+
 
 def request_card(active_player):
     """
@@ -171,7 +180,7 @@ def request_card(active_player):
         print(user_hand)
         requested_card = input("\nWhich card do you want to request?\n")
         card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
-        if card_check == True:
+        if card_check is True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
             hand_over_requested_card(requested_card_index, active_player)
             check_user_hand_for_foak(requested_card)
@@ -192,7 +201,7 @@ def request_card(active_player):
 
         card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
 
-        if card_check == True:
+        if card_check is True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
             hand_over_requested_card(requested_card_index, active_player)
             check_computer_hand_for_foak(requested_card)
@@ -205,6 +214,7 @@ def request_card(active_player):
             add_card_to_computer_hand(pull_card_from_deck("computer"))
             active_player = switch_active_player(active_player)
             request_card(active_player)
+
 
 def hand_over_requested_card(requested_card_index, active_player):
     """
@@ -223,6 +233,7 @@ def hand_over_requested_card(requested_card_index, active_player):
         user_hand.pop(int(requested_card_index))
         add_card_to_computer_hand(requested_card)
 
+
 def switch_active_player(active_player):
     """
     Switches the active player beased on the existing active player, to change turns
@@ -236,6 +247,7 @@ def switch_active_player(active_player):
         active_player = "User"
         return active_player
 
+
 def determine_computer_request_value():
     """
     Determines the card value the computer is asking the user for. 
@@ -245,24 +257,14 @@ def determine_computer_request_value():
     computer_request_value = computer_requested_card.split(maxsplit=1)
     return (computer_request_value[0])
 
-def determine_pulled_card_value(selected_card, active_player):
+
+def determine_pulled_card_value(selected_card):
     """
     Determines the card value of the new card drawn from the deck. 
     """
-    pulled_card_value = selected_card.split(maxsplit=1)
-    if active_player == "user":
-        print("Checking the user hand for foak after pulling a card from deck")
-        time.sleep(1)
-        print(f"The card pulled from the deck was: {pulled_card_value[0]}")
-        time.sleep(1)
-        check_user_hand_for_foak(str(pulled_card_value[0]))
-    else:
-        print("Checking the computer hand for foak after pulling a card from deck")
-        time.sleep(1)
-        print(f"The card pulled from the deck was: {pulled_card_value[0]}")
-        time.sleep(1)
-        check_computer_hand_for_foak(str(pulled_card_value[0]))
-    return (pulled_card_value[0])
+    split_selected_card = selected_card.split(maxsplit=1)
+    pulled_card_value = (split_selected_card[0])
+    return pulled_card_value
 
 
 def check_user_hand_for_foak(requested_card):
@@ -274,6 +276,7 @@ def check_user_hand_for_foak(requested_card):
         if requested_card in elem:
             user_foak.append(user_hand[i])     
     confirm_user_foak(requested_card)
+
 
 def check_computer_hand_for_foak(requested_card):
     """
@@ -299,6 +302,7 @@ def confirm_user_foak(requested_card):
         user_foak.clear()
     else:
         user_foak.clear()
+
 
 def identify_foak_index_from_user_hand(requested_card):
     """
@@ -333,6 +337,7 @@ def confirm_computer_foak(requested_card):
         computer_foak.clear()
     else:
         computer_foak.clear()
+
 
 def identify_foak_index_from_computer_hand(requested_card):
     """
