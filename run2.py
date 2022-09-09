@@ -186,7 +186,9 @@ def request_card(active_player):
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
             print(f"Calling hand_over_requested_card with requested_card_index as {requested_card_index}, active player as {active_player}")
             time.sleep(2)
-            hand_over_requested_card(requested_card_index, active_player)
+            requested_card = hand_over_requested_card(requested_card_index, active_player)
+            print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
+            add_card_to_player_hand(requested_card, active_player)
             print(f"Calling check_user_hand_for_foak with requested_card as {requested_card}")
             time.sleep(2)
             check_user_hand_for_foak(requested_card)
@@ -222,7 +224,9 @@ def request_card(active_player):
 
         if card_check is True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
-            hand_over_requested_card(requested_card_index, active_player)
+            requested_card = hand_over_requested_card(requested_card_index, active_player)
+            print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
+            add_card_to_player_hand(requested_card, active_player)
             check_computer_hand_for_foak(requested_card)
             computer_foak.clear()
             request_card(active_player)
@@ -240,20 +244,22 @@ def request_card(active_player):
 
 def hand_over_requested_card(requested_card_index, active_player):
     """
-    Receives the requested card's index and moves it from the computer_hand to the user_hand
+    Receives the requested card's index and removes it from the in_active player's hand
     """
     if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
         time.sleep(1)
         requested_card = computer_hand[requested_card_index]
+        print(f"The card the computer is handing over is {requested_card}")
         computer_hand.pop(int(requested_card_index))
     else:
         print("\nYou are handing over the card the Computer requested\n")
         time.sleep(1)
         requested_card = user_hand[requested_card_index]
+        print(f"The card you are handing over is {requested_card}")
         user_hand.pop(int(requested_card_index))
-    print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
-    add_card_to_player_hand(requested_card, active_player)
+    print(f"The requested_card being returned is {requested_card}")
+    return requested_card
 
 
 def switch_active_player(active_player):
