@@ -141,10 +141,11 @@ def add_card_to_player_hand(selected_card, active_player):
     """
     print(f"add_card_to_player_hand received: {selected_card} and {active_player}")
     if active_player == "user":
-        pulled_card_value = user_hand.append(selected_card)
+        user_hand.append(selected_card)
     else:
-        pulled_card_value = computer_hand.append(selected_card)
-    return pulled_card_value
+        computer_hand.append(selected_card)
+    print(f"Value being returned by add_card_to_player_hand: {selected_card}")
+    return selected_card
 
 
 def count_cards_in_deck():
@@ -188,10 +189,10 @@ def request_card(active_player):
             time.sleep(2)
             requested_card = hand_over_requested_card(requested_card_index, active_player)
             print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
-            add_card_to_player_hand(requested_card, active_player)
+            requested_card = add_card_to_player_hand(requested_card, active_player)
             print(f"Calling check_user_hand_for_foak with requested_card as {requested_card}")
             time.sleep(2)
-            check_user_hand_for_foak(requested_card)
+            check_player_hand_for_foak(requested_card, active_player)
             user_foak.clear()
             request_card(active_player)
             
@@ -207,10 +208,10 @@ def request_card(active_player):
             print(f"Calling add_card_to_user_hand with selected card as {selected_card}")
             time.sleep(2)
             add_card_to_player_hand(selected_card, active_player)
-            pulled_card_value = determine_pulled_card_value(selected_card)
-            print(f"Calling check_user_hand_for_foak with pulled card value as {pulled_card_value}\n")
+            requested_card = determine_pulled_card_value(selected_card)
+            print(f"Calling check_user_hand_for_foak with pulled card value as {requested_card}\n")
             time.sleep(2)
-            check_user_hand_for_foak(selected_card)
+            check_player_hand_for_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
             request_card(active_player)
     else:
@@ -226,8 +227,8 @@ def request_card(active_player):
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
             requested_card = hand_over_requested_card(requested_card_index, active_player)
             print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
-            add_card_to_player_hand(requested_card, active_player)
-            check_computer_hand_for_foak(requested_card)
+            requested_card = add_card_to_player_hand(requested_card, active_player)
+            check_player_hand_for_foak(requested_card, active_player)
             computer_foak.clear()
             request_card(active_player)
             
@@ -236,8 +237,8 @@ def request_card(active_player):
             time.sleep(1)
             selected_card = pull_card_from_deck("computer")
             add_card_to_player_hand(selected_card, active_player)
-            pulled_card_value = determine_pulled_card_value(selected_card)
-            check_computer_hand_for_foak(pulled_card_value)
+            requested_card = determine_pulled_card_value(selected_card)
+            check_player_hand_for_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
             request_card(active_player)
 
@@ -295,38 +296,33 @@ def determine_pulled_card_value(selected_card):
     return pulled_card_value
 
 
-def check_user_hand_for_foak(requested_card):
+def check_player_hand_for_foak(requested_card, active_player):
     """
-    Updates foak list with request card matches from user's
+    Updates foak list with request card matches from player's
     hand and adds to the temp foak list.
     """
-    print(f"Starting user_hand enumerate process with requested_card as {requested_card}")
-    print(user_foak)  
-    for i, elem in enumerate(user_hand):
-        if requested_card in elem:
-            user_foak.append(user_hand[i])
-    print("User FOAK is:\n")
-    print(user_foak)  
-    print(f"Calling confirm_user_foak with requested_card as {requested_card}")
-    print(user_foak) 
-    confirm_user_foak(requested_card)
-
-
-def check_computer_hand_for_foak(requested_card):
-    """
-    Updates foak list with request card matches from computer's
-    hand and adds to the temp foak list.
-    """
-    print(f"Starting computer_hand enumerate process with requested_card as {requested_card}")
-    print(computer_foak) 
-    for i, elem in enumerate(computer_hand):
-        if requested_card in elem:
-            computer_foak.append(computer_hand[i])
-    print("Computer FOAK is:\n")
-    print(computer_foak)
-    print(f"Calling confirm_user_foak with requested_card as {requested_card}")
-    print(user_foak) 
-    confirm_computer_foak(requested_card)
+    if active_player == "user":
+        print(f"Starting user_hand enumerate process with requested_card as {requested_card}")
+        print(user_foak)  
+        for i, elem in enumerate(user_hand):
+            if requested_card in elem:
+                user_foak.append(user_hand[i])
+        print("User FOAK is:\n")
+        print(user_foak)  
+        print(f"Calling confirm_user_foak with requested_card as {requested_card}")
+        print(user_foak) 
+        confirm_user_foak(requested_card)
+    else:
+        print(f"Starting computer_hand enumerate process with requested_card as {requested_card}")
+        print(computer_foak) 
+        for i, elem in enumerate(computer_hand):
+            if requested_card in elem:
+                computer_foak.append(computer_hand[i])
+        print("Computer FOAK is:\n")
+        print(computer_foak)
+        print(f"Calling confirm_user_foak with requested_card as {requested_card}")
+        print(user_foak) 
+        confirm_computer_foak(requested_card)
 
 
 def confirm_user_foak(requested_card):
