@@ -158,7 +158,7 @@ def select_next_card():
     return selected_card
 
 
-def request_card(active_player):
+def play_a_round(active_player):
     """
     Determines if the opponent holds the requested card, and returns the card's index if True.
     """
@@ -187,7 +187,7 @@ def request_card(active_player):
             check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
-            request_card(active_player)
+            play_a_round(active_player)
             
         else:
             print("Starting Check Card else process\n")
@@ -208,7 +208,7 @@ def request_card(active_player):
             print(f"Calling confirm_player_foak with requested_card as {requested_card}")
             confirm_player_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
-            request_card(active_player)
+            play_a_round(active_player)
     else:
         requested_card = determine_computer_request_value()
         print("The Computer is choosing a card to request\n")
@@ -226,7 +226,7 @@ def request_card(active_player):
             check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             computer_foak.clear()
-            request_card(active_player)
+            play_a_round(active_player)
             
         else:
             print("\nYou didn't have that card, the computer is taking another card from the deck\n")
@@ -237,7 +237,7 @@ def request_card(active_player):
             check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
-            request_card(active_player)
+            play_a_round(active_player)
 
 
 def hand_over_requested_card(requested_card_index, active_player):
@@ -383,7 +383,7 @@ def main():
     explain_game_rules()
     print("\n")
     active_player = "user"
-    request_card(active_player)
+    play_a_round(active_player)
 
 # Start main game running
 
