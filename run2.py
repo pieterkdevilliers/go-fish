@@ -301,16 +301,18 @@ def check_player_hand_for_foak(requested_card, active_player):
     requested_card_value = (requested_card.split(maxsplit=1)[0])
     if active_player == "user":
         print(f"Starting user_hand enumerate process with requested_card_value as {requested_card_value}")
-        print(user_foak)  
         for i, elem in enumerate(user_hand):
             if requested_card_value in elem:
                 user_foak.append(user_hand[i])
+        print("User foak at end of check was:\n")
+        print(user_foak)
     else:
         print(f"Starting computer_hand enumerate process with requested_card_value as {requested_card_value}")
-        print(computer_foak) 
         for i, elem in enumerate(computer_hand):
             if requested_card_value in elem:
                 computer_foak.append(computer_hand[i])
+        print("User foak at end of check was:\n")
+        print(user_foak)
 
 
 def confirm_player_foak(requested_card, active_player):
