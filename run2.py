@@ -95,12 +95,12 @@ def explain_game_rules():
 
     player_status = input("If you are ready to begin, type GO! below:\n")
     if player_status == "GO!":
-        count_cards_in_deck()
+        deal_cards()
     else:
         player_status = input("That command is not recognised. In order to start the game type GO! below:\n")
 
 
-def deal_cards(deck_size):
+def deal_cards():
     """
     Deals the cards by randomly selecting 7 cards for the user and 7 cards for the computer.
     This will remove them from the deck list and add 7 cards to the user_hand
@@ -124,7 +124,7 @@ def deal_cards(deck_size):
             i += 1
 
 
-def pull_card_from_deck(active_player):
+def pull_card_from_deck():
     """
     Pulls a card from the deck to add it to the active user hand.
     """
@@ -146,14 +146,6 @@ def add_card_to_player_hand(selected_card, active_player):
         computer_hand.append(selected_card)
     print(f"Value being returned by add_card_to_player_hand: {selected_card}")
     return selected_card
-
-
-def count_cards_in_deck():
-    """
-    Checks remaining number of cards in deck, to determine the range of the random card select.
-    """
-    num_cards_in_deck = len(deck)
-    deal_cards(num_cards_in_deck)
 
 
 def select_next_card():
@@ -202,7 +194,7 @@ def request_card(active_player):
             print("\nThe Computer doesn't have that card, take another card from the deck\n")
             print("Calling pull_card_from_deck as user\n")
             time.sleep(2)
-            selected_card = pull_card_from_deck("user")
+            selected_card = pull_card_from_deck()
             print(f"selected_card is now {selected_card}")
             time.sleep(2)
             print(f"Calling add_card_to_user_hand with selected card as {selected_card}")
@@ -235,7 +227,7 @@ def request_card(active_player):
         else:
             print("\nYou didn't have that card, the computer is taking another card from the deck\n")
             time.sleep(1)
-            selected_card = pull_card_from_deck("computer")
+            selected_card = pull_card_from_deck()
             add_card_to_player_hand(selected_card, active_player)
             requested_card = determine_pulled_card_value(selected_card)
             check_player_hand_for_foak(requested_card, active_player)
@@ -311,7 +303,7 @@ def check_player_hand_for_foak(requested_card, active_player):
         print(user_foak)  
         print(f"Calling confirm_user_foak with requested_card as {requested_card}")
         print(user_foak) 
-        confirm_user_foak(requested_card)
+        confirm_player_foak(requested_card, active_player)
     else:
         print(f"Starting computer_hand enumerate process with requested_card as {requested_card}")
         print(computer_foak) 
@@ -322,23 +314,35 @@ def check_player_hand_for_foak(requested_card, active_player):
         print(computer_foak)
         print(f"Calling confirm_user_foak with requested_card as {requested_card}")
         print(user_foak) 
-        confirm_computer_foak(requested_card)
+        confirm_player_foak(requested_card, active_player)
 
 
-def confirm_user_foak(requested_card):
+def confirm_player_foak(requested_card, active_player):
     """
-    Determines if user foak is full, if so, adds foak list to table and clears foak.
+    Determines if player foak is full, if so, adds foak list to table and clears foak.
     """
-    if len(user_foak) == 4:
-        user_table[requested_card] = user_foak.copy()
-        print("\nCongratulations! You have a Four Of A King\n")
-        print("\nYour Four Of A Kinds Are:\n")
-        print(user_table)
-        print(f"Calling identify_foak_index_from_user_hand with requested_card as {requested_card}")
-        identify_foak_index_from_user_hand(requested_card)
-        user_foak.clear()
+    if active_player == "user":
+        if len(user_foak) == 4:
+            user_table[requested_card] = user_foak.copy()
+            print("\nCongratulations! You have a Four Of A King\n")
+            print("\nYour Four Of A Kinds Are:\n")
+            print(user_table)
+            print(f"Calling identify_foak_index_from_user_hand with requested_card as {requested_card}")
+            identify_foak_index_from_user_hand(requested_card)
+            user_foak.clear()
+        else:
+            user_foak.clear()
     else:
-        user_foak.clear()
+        if len(computer_foak) == 4:
+            computer_table[requested_card] = computer_foak.copy()
+            print("\nThe Computer has a Four Of A King\n")
+            print("\nThe Computer's Four Of A Kinds Are:\n")
+            print(computer_table)
+            print(f"Calling identify_foak_index_from_computer_hand with requested_card as {requested_card}")
+            identify_foak_index_from_computer_hand(requested_card)
+            computer_foak.clear()
+        else:
+            computer_foak.clear()
 
 
 def identify_foak_index_from_user_hand(requested_card):
@@ -359,22 +363,6 @@ def delete_foak_from_user_hand(foak_card_index):
     Deletes identified foak card from user_hand
     """
     user_hand.pop(int(foak_card_index))
-
-
-def confirm_computer_foak(requested_card):
-    """
-    Determines if computer foak is full, if so, adds foak list to table and clears foak.
-    """
-    if len(computer_foak) == 4:
-        computer_table[requested_card] = computer_foak.copy()
-        print("\nThe Computer has a Four Of A King\n")
-        print("\nThe Computer's Four Of A Kinds Are:\n")
-        print(computer_table)
-        print(f"Calling identify_foak_index_from_computer_hand with requested_card as {requested_card}")
-        identify_foak_index_from_computer_hand(requested_card)
-        computer_foak.clear()
-    else:
-        computer_foak.clear()
 
 
 def identify_foak_index_from_computer_hand(requested_card):
