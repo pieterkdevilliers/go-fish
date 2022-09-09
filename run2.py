@@ -137,28 +137,13 @@ def pull_card_from_deck(active_player):
 
 def add_card_to_player_hand(selected_card, active_player):
     """
-    Adds the selected card to the user_hand list.
+    Adds the selected card to the active_player's hand list.
     """
+    print(f"add_card_to_player_hand received: {selected_card} and {active_player}")
     if active_player == "user":
         pulled_card_value = user_hand.append(selected_card)
     else:
         pulled_card_value = computer_hand.append(selected_card)
-    return pulled_card_value
-
-
-def add_card_to_user_hand(selected_card):
-    """
-    Adds the selected card to the user_hand list.
-    """
-    pulled_card_value = user_hand.append(selected_card)
-    return pulled_card_value
-
-
-def add_card_to_computer_hand(selected_card):
-    """
-    Adds the selected card to the computer_hand list.
-    """
-    pulled_card_value = computer_hand.append(selected_card)
     return pulled_card_value
 
 
@@ -184,7 +169,7 @@ def request_card(active_player):
     """
     Determines if the opponent holds the requested card, and returns the card's index if True.
     """
-    if active_player == "User":
+    if active_player == "user":
         print("It is your turn.\n")
         print("\n")
         print("You hold these cards in your hand:\n")
@@ -257,7 +242,7 @@ def hand_over_requested_card(requested_card_index, active_player):
     """
     Receives the requested card's index and moves it from the computer_hand to the user_hand
     """
-    if active_player == "User":
+    if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
         time.sleep(1)
         requested_card = computer_hand[requested_card_index]
@@ -267,6 +252,7 @@ def hand_over_requested_card(requested_card_index, active_player):
         time.sleep(1)
         requested_card = user_hand[requested_card_index]
         user_hand.pop(int(requested_card_index))
+    print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
     add_card_to_player_hand(requested_card, active_player)
 
 
@@ -274,13 +260,13 @@ def switch_active_player(active_player):
     """
     Switches the active player beased on the existing active player, to change turns
     """
-    if active_player == "User":
-        active_player = "Computer"
+    if active_player == "user":
+        active_player = "computer"
         print("\nIt is now the Computer's turn")
         time.sleep(1)
         return active_player
     else:
-        active_player = "User"
+        active_player = "user"
         return active_player
 
 
@@ -416,7 +402,7 @@ def main():
     request_player_name()
     explain_game_rules()
     print("\n")
-    active_player = "User"
+    active_player = "user"
     request_card(active_player)
 
 # Start main game running
