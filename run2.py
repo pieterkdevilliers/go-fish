@@ -185,6 +185,7 @@ def request_card(active_player):
             print(f"Calling check_user_hand_for_foak with requested_card as {requested_card}")
             time.sleep(2)
             check_player_hand_for_foak(requested_card, active_player)
+            confirm_player_foak(requested_card, active_player)
             user_foak.clear()
             request_card(active_player)
             
@@ -204,6 +205,8 @@ def request_card(active_player):
             print(f"Calling check_user_hand_for_foak with pulled card value as {requested_card}\n")
             time.sleep(2)
             check_player_hand_for_foak(requested_card, active_player)
+            print(f"Calling confirm_player_foak with requested_card as {requested_card}")
+            confirm_player_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
             request_card(active_player)
     else:
@@ -221,6 +224,7 @@ def request_card(active_player):
             print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
             requested_card = add_card_to_player_hand(requested_card, active_player)
             check_player_hand_for_foak(requested_card, active_player)
+            confirm_player_foak(requested_card, active_player)
             computer_foak.clear()
             request_card(active_player)
             
@@ -231,6 +235,7 @@ def request_card(active_player):
             add_card_to_player_hand(selected_card, active_player)
             requested_card = determine_pulled_card_value(selected_card)
             check_player_hand_for_foak(requested_card, active_player)
+            confirm_player_foak(requested_card, active_player)
             active_player = switch_active_player(active_player)
             request_card(active_player)
 
@@ -293,28 +298,19 @@ def check_player_hand_for_foak(requested_card, active_player):
     Updates foak list with request card matches from player's
     hand and adds to the temp foak list.
     """
+    requested_card_value = (requested_card.split(maxsplit=1)[0])
     if active_player == "user":
-        print(f"Starting user_hand enumerate process with requested_card as {requested_card}")
+        print(f"Starting user_hand enumerate process with requested_card_value as {requested_card_value}")
         print(user_foak)  
         for i, elem in enumerate(user_hand):
-            if requested_card in elem:
+            if requested_card_value in elem:
                 user_foak.append(user_hand[i])
-        print("User FOAK is:\n")
-        print(user_foak)  
-        print(f"Calling confirm_user_foak with requested_card as {requested_card}")
-        print(user_foak) 
-        confirm_player_foak(requested_card, active_player)
     else:
-        print(f"Starting computer_hand enumerate process with requested_card as {requested_card}")
+        print(f"Starting computer_hand enumerate process with requested_card_value as {requested_card_value}")
         print(computer_foak) 
         for i, elem in enumerate(computer_hand):
-            if requested_card in elem:
+            if requested_card_value in elem:
                 computer_foak.append(computer_hand[i])
-        print("Computer FOAK is:\n")
-        print(computer_foak)
-        print(f"Calling confirm_user_foak with requested_card as {requested_card}")
-        print(user_foak) 
-        confirm_player_foak(requested_card, active_player)
 
 
 def confirm_player_foak(requested_card, active_player):
@@ -324,65 +320,57 @@ def confirm_player_foak(requested_card, active_player):
     if active_player == "user":
         if len(user_foak) == 4:
             user_table[requested_card] = user_foak.copy()
-            print("\nCongratulations! You have a Four Of A King\n")
+            print("\nCongratulations! You have a Four Of A Kind\n")
             print("\nYour Four Of A Kinds Are:\n")
             print(user_table)
             print(f"Calling identify_foak_index_from_user_hand with requested_card as {requested_card}")
-            identify_foak_index_from_user_hand(requested_card)
+            identify_foak_index_from_player_hand(requested_card, active_player)
             user_foak.clear()
         else:
             user_foak.clear()
     else:
         if len(computer_foak) == 4:
             computer_table[requested_card] = computer_foak.copy()
-            print("\nThe Computer has a Four Of A King\n")
+            print("\nThe Computer has a Four Of A Kind\n")
             print("\nThe Computer's Four Of A Kinds Are:\n")
             print(computer_table)
             print(f"Calling identify_foak_index_from_computer_hand with requested_card as {requested_card}")
-            identify_foak_index_from_computer_hand(requested_card)
+            identify_foak_index_from_player_hand(requested_card, active_player)
             computer_foak.clear()
         else:
             computer_foak.clear()
 
 
-def identify_foak_index_from_user_hand(requested_card):
+def identify_foak_index_from_player_hand(requested_card, active_player):
     """
-    Identifies and removes the foak cards from the user_hand after they were added to the user_table
+    Identifies and removes the foak cards from the player's hand after they were added to the player's table
     """
-    for i, elem in enumerate(user_hand):
-        if requested_card in elem:
-            print("Identifying foak user_hand index\n")
-            time.sleep(1)
-            foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
-            print(f"Deleting identified foak_index: {foak_card_index}")
-            delete_foak_from_user_hand(foak_card_index)
+    if active_player == "user":
+        for i, elem in enumerate(user_hand):
+            if requested_card in elem:
+                print("Identifying foak user_hand index\n")
+                time.sleep(1)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
+                print(f"Deleting identified foak_index: {foak_card_index}")
+                delete_foak_from_player_hand(foak_card_index, active_player)
+    else:
+        for i, elem in enumerate(computer_hand):
+            if requested_card in elem:
+                print("Identifying foak computer_hand index\n")
+                time.sleep(1)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+                print(f"Deleting identified foak_index: {foak_card_index}")
+                delete_foak_from_player_hand(foak_card_index, active_player)                    
 
 
-def delete_foak_from_user_hand(foak_card_index):
+def delete_foak_from_player_hand(foak_card_index, active_player):
     """
-    Deletes identified foak card from user_hand
+    Deletes identified foak card from player hand
     """
-    user_hand.pop(int(foak_card_index))
-
-
-def identify_foak_index_from_computer_hand(requested_card):
-    """
-    Identifies and removes the foak cards from the computer_hand after they were added to the computer_table
-    """
-    for i, elem in enumerate(computer_hand):
-        if requested_card in elem:
-            print("Identifying foak computer_hand index\n")
-            time.sleep(1)
-            foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-            print(f"Deleting identified foak_index: {foak_card_index}")
-            delete_foak_from_computer_hand(foak_card_index)
-
-
-def delete_foak_from_computer_hand(foak_card_index):
-    """
-    Deletes identified foak card from computer_hand
-    """
-    computer_hand.pop(int(foak_card_index))            
+    if active_player == "user":
+        user_hand.pop(int(foak_card_index))
+    else:
+        computer_hand.pop(int(foak_card_index))          
 
 
 def main():
