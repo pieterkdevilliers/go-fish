@@ -158,86 +158,6 @@ def select_next_card():
     return selected_card
 
 
-def play_a_round_new(active_player):
-    """
-    Determines if the opponent holds the requested card, and returns the card's index if True.
-    """
-    if active_player == "user":
-        print("It is your turn.\n")
-        print("\n")
-        print("You hold these cards in your hand:\n")
-        print(user_hand)
-        requested_card = input("\nWhich card do you want to request?\n")
-        print("Completing Card Check\n")
-        time.sleep(2)
-        card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
-        print("Starting Card Check True Process\n")
-        time.sleep(2)
-        if card_check is True:
-            print("Getting requested card index from Computer Hand\n")
-            time.sleep(2)
-            requested_card_index = len(
-            tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-        else:
-            print("Starting Check Card else process\n")
-            time.sleep(2)
-            print("\nThe Computer doesn't have that card, take another card from the deck\n")
-            print("Calling pull_card_from_deck as user\n")
-            time.sleep(2)
-            selected_card = pull_card_from_deck()
-            print(f"selected_card is now {selected_card}")
-            time.sleep(2)
-            print(f"Calling add_card_to_user_hand with selected card as {selected_card}")
-            time.sleep(2)
-            add_card_to_player_hand(selected_card, active_player)
-            requested_card = determine_pulled_card_value(selected_card)
-            print(f"Calling check_user_hand_for_foak with pulled card value as {requested_card}\n")
-            time.sleep(2)
-            check_player_hand_for_foak(requested_card, active_player)
-            print(f"Calling confirm_player_foak with requested_card as {requested_card}")
-            confirm_player_foak(requested_card, active_player)
-            active_player = switch_active_player(active_player)
-            play_a_round(active_player)
-    else:
-        requested_card = determine_computer_request_value()
-        print("The Computer is choosing a card to request\n")
-        time.sleep(2)
-        print(f"The card requested by the computer was: {requested_card}")
-        time.sleep(1)
-        card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
-        if card_check is True:
-            print("Getting requested card index from User Hand\n")
-            time.sleep(2)
-            requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
-            requested_card = hand_over_requested_card(requested_card_index, active_player)
-        else:
-            print("\nYou didn't have that card, the computer is taking another card from the deck\n")
-            time.sleep(1)
-            selected_card = pull_card_from_deck()
-            add_card_to_player_hand(selected_card, active_player)
-            requested_card = determine_pulled_card_value(selected_card)
-            check_player_hand_for_foak(requested_card, active_player)
-            confirm_player_foak(requested_card, active_player)
-            active_player = switch_active_player(active_player)
-            play_a_round(active_player)
-    
-    print(f"Calling hand_over_requested_card with requested_card_index as {requested_card_index}, active player as {active_player}")
-    time.sleep(2)
-    requested_card = hand_over_requested_card(requested_card_index, active_player)
-    print(f"Adding card to player hand with requested_card: {requested_card} and active_player as: {active_player}")
-    requested_card = add_card_to_player_hand(requested_card, active_player)
-    print(f"Calling check_user_hand_for_foak with requested_card as {requested_card}")
-    time.sleep(2)
-    check_player_hand_for_foak(requested_card, active_player)
-    confirm_player_foak(requested_card, active_player)
-
-    if active_player == "user":
-        user_foak.clear()
-    else:
-        computer_foak.clear()
-    play_a_round(active_player)
-
-
 def play_a_round(active_player):
     """
     Determines if the opponent holds the requested card, and returns the card's index if True.
@@ -392,7 +312,7 @@ def check_player_hand_for_foak(requested_card, active_player):
             if requested_card_value in elem:
                 computer_foak.append(computer_hand[i])
         print("User foak at end of check was:\n")
-        print(user_foak)
+        print(computer_foak)
 
 
 def confirm_player_foak(requested_card, active_player):
@@ -434,6 +354,7 @@ def identify_foak_index_from_player_hand(requested_card, active_player):
                 time.sleep(1)
                 foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
                 print(f"Deleting identified foak_index: {foak_card_index}")
+                time.sleep(1)
                 delete_foak_from_player_hand(foak_card_index, active_player)
     else:
         for i, elem in enumerate(computer_hand):
@@ -442,6 +363,7 @@ def identify_foak_index_from_player_hand(requested_card, active_player):
                 time.sleep(1)
                 foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
                 print(f"Deleting identified foak_index: {foak_card_index}")
+                time.sleep(1)
                 delete_foak_from_player_hand(foak_card_index, active_player)                    
 
 
