@@ -140,12 +140,13 @@ def add_card_to_player_hand(selected_card, active_player):
     Adds the selected card to the active_player's hand list.
     """
     print(f"add_card_to_player_hand received: {selected_card} and {active_player}")
+    requested_card_value = (selected_card.split(maxsplit=1)[0])
     if active_player == "user":
         user_hand.append(selected_card)
     else:
         computer_hand.append(selected_card)
     print(f"Value being returned by add_card_to_player_hand: {selected_card}")
-    return selected_card
+    return requested_card_value
 
 
 def select_next_card():
@@ -173,20 +174,24 @@ def play_a_round(active_player):
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
             requested_card = hand_over_requested_card(requested_card_index, active_player)
             requested_card = add_card_to_player_hand(requested_card, active_player)
-            check_player_hand_for_foak(requested_card, active_player)
+            requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
             play_a_round(active_player)
             
         else:
-            print("\nThe Computer doesn't have that card, take another card from the deck\n")
-            selected_card = pull_card_from_deck()
-            add_card_to_player_hand(selected_card, active_player)
-            requested_card = determine_pulled_card_value(selected_card)
-            check_player_hand_for_foak(requested_card, active_player)
-            confirm_player_foak(requested_card, active_player)
-            active_player = switch_active_player(active_player)
+            if deck != []:
+                print("\nThe Computer doesn't have that card, take another card from the deck\n")
+                selected_card = pull_card_from_deck()
+                add_card_to_player_hand(selected_card, active_player)
+                requested_card = determine_pulled_card_value(selected_card)
+                requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+                confirm_player_foak(requested_card_value, active_player)
+                active_player = switch_active_player(active_player)
+            else:
+                print("\nThere are no more cards left in the deck.\n")
             play_a_round(active_player)
+
     else:
         requested_card = determine_computer_request_value()
         print("The Computer is choosing a card to request\n")
@@ -200,20 +205,23 @@ def play_a_round(active_player):
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
             requested_card = hand_over_requested_card(requested_card_index, active_player)
             requested_card = add_card_to_player_hand(requested_card, active_player)
-            check_player_hand_for_foak(requested_card, active_player)
+            requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
-            computer_foak.clear()
+            computer_foak.clear()  
             play_a_round(active_player)
             
         else:
-            print("\nYou didn't have that card, the computer is taking another card from the deck\n")
-            time.sleep(0.5)
-            selected_card = pull_card_from_deck()
-            add_card_to_player_hand(selected_card, active_player)
-            requested_card = determine_pulled_card_value(selected_card)
-            check_player_hand_for_foak(requested_card, active_player)
-            confirm_player_foak(requested_card, active_player)
-            active_player = switch_active_player(active_player)
+            if deck != []:
+                print("\nYou didn't have that card, the computer is taking another card from the deck\n")
+                time.sleep(0.5)
+                selected_card = pull_card_from_deck()
+                add_card_to_player_hand(selected_card, active_player)
+                requested_card = determine_pulled_card_value(selected_card)
+                requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+                confirm_player_foak(requested_card_value, active_player)
+                active_player = switch_active_player(active_player)
+            else:
+                print("\nThere are no more cards left in the deck.\n")
             play_a_round(active_player)
 
 
@@ -252,8 +260,11 @@ def determine_computer_request_value():
     """
     Determines the card value the computer is asking the user for. 
     """
-    computer_requested_card_position = random.randint(0, (len(computer_hand) - 1))
-    computer_requested_card = computer_hand[computer_requested_card_position]
+    if len(computer_hand) != 1:
+        computer_requested_card_position = random.randint(0, (len(computer_hand) - 1))
+        computer_requested_card = computer_hand[computer_requested_card_position]
+    else:
+        computer_requested_card = computer_hand[0]
     computer_request_value = computer_requested_card.split(maxsplit=1)
     return (computer_request_value[0])
 
@@ -278,44 +289,45 @@ def check_player_hand_for_foak(requested_card, active_player):
             if requested_card_value in elem:
                 user_foak.append(user_hand[i])
         print(user_foak)
+        return requested_card_value
     else:
         for i, elem in enumerate(computer_hand):
             if requested_card_value in elem:
                 computer_foak.append(computer_hand[i])
         print(computer_foak)
+        return requested_card_value
 
 
-def confirm_player_foak(requested_card, active_player):
+def confirm_player_foak(requested_card_value, active_player):
     """
     Determines if player foak is full, if so, adds foak list to table and clears foak.
     """
     if active_player == "user":
         if len(user_foak) == 4:
-            user_table[requested_card] = user_foak.copy()
+            user_table[requested_card_value] = user_foak.copy()
             print("\nCongratulations! You have a Four Of A Kind\n")
             print("\nYour Four Of A Kinds Are:\n")
             print(user_table)
-            identify_foak_index_from_player_hand(requested_card, active_player)
+            identify_foak_index_from_player_hand(requested_card_value, active_player)
             user_foak.clear()
         else:
             user_foak.clear()
     else:
         if len(computer_foak) == 4:
-            computer_table[requested_card] = computer_foak.copy()
+            computer_table[requested_card_value] = computer_foak.copy()
             print("\nThe Computer has a Four Of A Kind\n")
             print("\nThe Computer's Four Of A Kinds Are:\n")
             print(computer_table)
-            identify_foak_index_from_player_hand(requested_card, active_player)
+            identify_foak_index_from_player_hand(requested_card_value, active_player)
             computer_foak.clear()
         else:
             computer_foak.clear()
 
 
-def identify_foak_index_from_player_hand(requested_card, active_player):
+def identify_foak_index_from_player_hand(requested_card_value, active_player):
     """
     Identifies and removes the foak cards from the player's hand after they were added to the player's table
     """
-    requested_card_value = (requested_card.split(maxsplit=1)[0])
     if active_player == "user":
         for card in user_hand[:]:
             if requested_card_value in card:
