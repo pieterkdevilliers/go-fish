@@ -214,7 +214,7 @@ def play_a_round(active_player):
         print("The Computer is choosing a card to request\n")
         time.sleep(2)
         print(f"The card requested by the computer was: {requested_card}")
-        time.sleep(1)
+        time.sleep(0.5)
 
         card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
 
@@ -230,7 +230,7 @@ def play_a_round(active_player):
             
         else:
             print("\nYou didn't have that card, the computer is taking another card from the deck\n")
-            time.sleep(1)
+            time.sleep(0.5)
             selected_card = pull_card_from_deck()
             add_card_to_player_hand(selected_card, active_player)
             requested_card = determine_pulled_card_value(selected_card)
@@ -246,13 +246,13 @@ def hand_over_requested_card(requested_card_index, active_player):
     """
     if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
-        time.sleep(1)
+        time.sleep(0.5)
         requested_card = computer_hand[requested_card_index]
         print(f"The card the computer is handing over is {requested_card}")
         computer_hand.pop(int(requested_card_index))
     else:
         print("\nYou are handing over the card the Computer requested\n")
-        time.sleep(1)
+        time.sleep(0.5)
         requested_card = user_hand[requested_card_index]
         print(f"The card you are handing over is {requested_card}")
         user_hand.pop(int(requested_card_index))
@@ -267,7 +267,7 @@ def switch_active_player(active_player):
     if active_player == "user":
         active_player = "computer"
         print("\nIt is now the Computer's turn")
-        time.sleep(1)
+        time.sleep(0.5)
         return active_player
     else:
         active_player = "user"
@@ -347,24 +347,62 @@ def identify_foak_index_from_player_hand(requested_card, active_player):
     """
     Identifies and removes the foak cards from the player's hand after they were added to the player's table
     """
+    requested_card_value = (requested_card.split(maxsplit=1)[0])
     if active_player == "user":
-        for i, elem in enumerate(user_hand):
-            if requested_card in elem:
+        for card in user_hand[:]:
+            print("This happened between for and if in user_hand")
+            print(f"This is the requested_card: {requested_card}")
+            print(card)
+            if requested_card_value in card:
                 print("Identifying foak user_hand index\n")
-                time.sleep(1)
-                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
+                time.sleep(0.5)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, user_hand)))
                 print(f"Deleting identified foak_index: {foak_card_index}")
-                time.sleep(1)
                 delete_foak_from_player_hand(foak_card_index, active_player)
+                print("Identifying and deleting next card for FOAK")
     else:
-        for i, elem in enumerate(computer_hand):
-            if requested_card in elem:
+        for card in computer_hand[:]:
+            print("This happened between for and if in computer_hand")
+            print(f"This is the requested_card: {requested_card}")
+            print(card)
+            if requested_card_value in card:
                 print("Identifying foak computer_hand index\n")
-                time.sleep(1)
-                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
+                time.sleep(0.5)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, computer_hand)))
                 print(f"Deleting identified foak_index: {foak_card_index}")
-                time.sleep(1)
-                delete_foak_from_player_hand(foak_card_index, active_player)                    
+                delete_foak_from_player_hand(foak_card_index, active_player)
+                print("Identifying and deleting next card for FOAK")
+
+
+def identify_foak_index_from_player_hand_enumerate(requested_card, active_player):
+    """
+    Identifies and removes the foak cards from the player's hand after they were added to the player's table
+    """
+    requested_card_value = (requested_card.split(maxsplit=1)[0])
+    if active_player == "user":
+        for i, elem in enumerate(user_hand)[:]:
+            print("This happened between for and if in user_hand")
+            print(f"This is the requested_card: {requested_card}")
+            print(elem)
+            if requested_card_value in elem:
+                print("Identifying foak user_hand index\n")
+                time.sleep(0.5)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, user_hand)))
+                print(f"Deleting identified foak_index: {foak_card_index}")
+                delete_foak_from_player_hand(foak_card_index, active_player)
+                print("Identifying and deleting next card for FOAK")
+    else:
+        for i, elem in enumerate(computer_hand)[:]:
+            print("This happened between for and if in computer_hand")
+            print(f"This is the requested_card: {requested_card}")
+            print(elem)
+            if requested_card_value in elem:
+                print("Identifying foak computer_hand index\n")
+                time.sleep(0.5)
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, computer_hand)))
+                print(f"Deleting identified foak_index: {foak_card_index}")
+                delete_foak_from_player_hand(foak_card_index, active_player)
+                print("Identifying and deleting next card for FOAK")
 
 
 def delete_foak_from_player_hand(foak_card_index, active_player):
