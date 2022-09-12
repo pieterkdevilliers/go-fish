@@ -177,6 +177,7 @@ def play_a_round(active_player):
             requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
+            report_scores(user_table, computer_table, deck)
             play_a_round(active_player)
             
         else:
@@ -190,7 +191,8 @@ def play_a_round(active_player):
                 active_player = switch_active_player(active_player)
             else:
                 print("\nThere are no more cards left in the deck.\n")
-            play_a_round(active_player)
+            report_scores(user_table, computer_table, deck)
+            play_a_round(active_player) 
 
     else:
         requested_card = determine_computer_request_value()
@@ -208,6 +210,7 @@ def play_a_round(active_player):
             requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             computer_foak.clear()  
+            report_scores(user_table, computer_table, deck)
             play_a_round(active_player)
             
         else:
@@ -222,7 +225,9 @@ def play_a_round(active_player):
                 active_player = switch_active_player(active_player)
             else:
                 print("\nThere are no more cards left in the deck.\n")
+            report_scores(user_table, computer_table, deck)
             play_a_round(active_player)
+            
 
 
 def hand_over_requested_card(requested_card_index, active_player):
@@ -349,6 +354,16 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
         user_hand.pop(int(foak_card_index))
     else:
         computer_hand.pop(int(foak_card_index))          
+
+
+def report_scores(user_table, computer_table, deck):
+    print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
+    print("Your Four Of A Kinds are:\n")
+    print(user_table)
+    print("\n")
+    print(f"The computer has {len(user_table)} on the table as it's Four Of A Kinds.\n")
+    print("The computer's Four Of A Kinds are:\n")
+    print(computer_table)
 
 
 def main():
