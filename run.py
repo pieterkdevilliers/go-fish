@@ -227,7 +227,7 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
             # report_scores(user_table, computer_table, deck)
             # play_a_round(active_player)
-    report_scores(user_table, computer_table, deck, active_player)
+    report_scores(user_table, computer_table, deck, active_player, user_hand, computer_hand)
             
 
 def hand_over_requested_card(requested_card_index, active_player):
@@ -366,7 +366,7 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
             print("Your Four Of A Kinds are:")
             print(user_table)
             print("\n")
-            print(f"The computer has {len(user_table)} on the table as it's Four Of A Kinds.\n")
+            print(f"The computer has {len(computer_table)} on the table as it's Four Of A Kinds.\n")
             print("The computer's Four Of A Kinds are:")
             print(computer_table)
 
