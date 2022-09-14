@@ -382,9 +382,12 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
     if len(user_table) > len(computer_table):
         print("You win!!")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
-    else:
-        len(computer_table) > len(user_table):
+
+    elif len(computer_table) > len(user_table):
         print("The computer won.")
+        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+    else:
+        print("Looks like it is a draw.")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
 
 
