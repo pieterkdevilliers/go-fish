@@ -356,17 +356,36 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
         computer_hand.pop(int(foak_card_index))          
 
 
-def report_scores(user_table, computer_table, deck, active_player):
-    if len(user_table) != 0:
-        print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
-        print("Your Four Of A Kinds are:")
-        print(user_table)
-        print("\n")
-        print(f"The computer has {len(user_table)} on the table as it's Four Of A Kinds.\n")
-        print("The computer's Four Of A Kinds are:")
-        print(computer_table)
+def report_scores(user_table, computer_table, deck, active_player, user_hand, computer_hand):
+    """
+    Reports the scores for each player at the end of each round. This only happens once at least one player has a foak.
+    """
+    if user_hand != [] and computer_hand != []:
+        if len(user_table) != 0:
+            print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
+            print("Your Four Of A Kinds are:")
+            print(user_table)
+            print("\n")
+            print(f"The computer has {len(user_table)} on the table as it's Four Of A Kinds.\n")
+            print("The computer's Four Of A Kinds are:")
+            print(computer_table)
 
-    play_a_round(active_player)
+        play_a_round(active_player)
+    else:
+        determine_winner(user_table, user_hand, computer_table, computer_hand)
+
+
+def determine_winner(user_table, user_hand, computer_table, computer_hand):
+    """
+    Determines the winner once one player has an empty hand by counting and comparing the number of foak for each player.
+    """
+    if len(user_table) > len(computer_table):
+        print("You win!!")
+        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+    else:
+        len(computer_table) > len(user_table):
+        print("The computer won.")
+        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
 
 
 def main():
