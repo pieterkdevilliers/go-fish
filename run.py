@@ -162,6 +162,7 @@ def play_a_round(active_player):
     Determines if the opponent holds the requested card, and returns the card's index if True.
     """
     if active_player == "user":
+        print("************************\n")
         print("It is your turn.\n")
         print("\n")
         print("You hold these cards in your hand:\n")
@@ -178,7 +179,7 @@ def play_a_round(active_player):
             
         else:
             if deck != []:
-                print("\nThe Computer doesn't have that card, take another card from the deck\n")
+                print("\nThe Computer doesn't have that card, you are taking another card from the deck\n")
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
@@ -189,6 +190,7 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
 
     else:
+        print("************************\n")
         requested_card = determine_computer_request_value()
         print("The Computer is choosing a card to request\n")
         time.sleep(2)
@@ -349,6 +351,7 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
     Reports the scores for each player at the end of each round. This only happens once at least one player has a foak.
     """
     if user_hand != [] and computer_hand != []:
+        print("************************\n")
         if len(user_table) != 0:
             print("\n")
             print("\n")
