@@ -182,6 +182,7 @@ def play_a_round(active_player):
         else:
             if deck != []:
                 print("\nThe Computer doesn't have that card, you are taking another card from the deck\n")
+                time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
@@ -212,7 +213,7 @@ def play_a_round(active_player):
         else:
             if deck != []:
                 print("\nYou didn't have that card, the computer is taking another card from the deck\n")
-                time.sleep(0.5)
+                time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
@@ -230,12 +231,12 @@ def hand_over_requested_card(requested_card_index, active_player):
     """
     if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
-        time.sleep(0.5)
+        time.sleep(2)
         requested_card = computer_hand[requested_card_index]
         computer_hand.pop(int(requested_card_index))
     else:
         print("\nYou are handing over the card the Computer requested\n")
-        time.sleep(0.5)
+        time.sleep(2)
         requested_card = user_hand[requested_card_index]
         user_hand.pop(int(requested_card_index))
     return requested_card
@@ -248,7 +249,7 @@ def switch_active_player(active_player):
     if active_player == "user":
         active_player = "computer"
         print("\nIt is now the Computer's turn")
-        time.sleep(0.5)
+        time.sleep(2)
         return active_player
     else:
         active_player = "user"
@@ -363,6 +364,7 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
             print(user_table)
             print("\n")
             print("\n")
+            time.sleep(2)
             print(f"The computer has {len(computer_table)} on the table as it's Four Of A Kinds.\n")
             print("\n")
             print("The computer's Four Of A Kinds are:")
@@ -401,73 +403,13 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
     play_another_round()
 
+
 def play_another_round():
     """
     Offers the player the chance to play again
     """
-    play_another_round = input("Would you like to play again? Type Yes or No")
+    play_another_round = input("Would you like to play again? Type Yes or No\n")
     if play_another_round == "Yes":
-
-        deck = [
-            "Ace of Hearts",
-            "2 of Hearts",
-            "3 of Hearts",
-            "4 of Hearts",
-            "5 of Hearts",
-            "6 of Hearts",
-            "7 of Hearts",
-            "8 of Hearts",
-            "9 of Hearts",
-            "10 of Hearts",
-            "Jack of Hearts",
-            "Queen of Hearts",
-            "King of Hearts",
-            "Ace of Diamonds",
-            "2 of Diamonds",
-            "3 of Diamonds",
-            "4 of Diamonds",
-            "5 of Diamonds",
-            "6 of Diamonds",
-            "7 of Diamonds",
-            "8 of Diamonds",
-            "9 of Diamonds",
-            "10 of Diamonds",
-            "Jack of Diamonds",
-            "Queen of Diamonds",
-            "King of Diamonds",
-            "Ace of Clubs",
-            "2 of Clubs",
-            "3 of Clubs",
-            "4 of Clubs",
-            "5 of Clubs",
-            "6 of Clubs",
-            "7 of Clubs",
-            "8 of Clubs",
-            "9 of Clubs",
-            "10 of Clubs",
-            "Jack of Clubs",
-            "Queen of Clubs",
-            "King of Clubs",
-            "Ace of Spades",
-            "2 of Spades",
-            "3 of Spades",
-            "4 of Spades",
-            "5 of Spades",
-            "6 of Spades",
-            "7 of Spades",
-            "8 of Spades",
-            "9 of Spades",
-            "10 of Spades",
-            "Jack of Spades",
-            "Queen of Spades",
-            "King of Spades"
-            ]
-        user_hand = []
-        computer_hand = []
-        user_foak = []
-        computer_foak = []
-        user_table = {}
-        computer_table = {}
         deal_cards()
     else:
         print("Thanks for playing!")
