@@ -139,13 +139,11 @@ def add_card_to_player_hand(selected_card, active_player):
     """
     Adds the selected card to the active_player's hand list.
     """
-    print(f"add_card_to_player_hand received: {selected_card} and {active_player}")
     requested_card_value = (selected_card.split(maxsplit=1)[0])
     if active_player == "user":
         user_hand.append(selected_card)
     else:
         computer_hand.append(selected_card)
-    print(f"Value being returned by add_card_to_player_hand: {selected_card}")
     return requested_card_value
 
 
@@ -177,8 +175,6 @@ def play_a_round(active_player):
             requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
-            # report_scores(user_table, computer_table, deck)
-            # play_a_round(active_player)
             
         else:
             if deck != []:
@@ -191,8 +187,6 @@ def play_a_round(active_player):
                 active_player = switch_active_player(active_player)
             else:
                 print("\nThere are no more cards left in the deck.\n")
-            # report_scores(user_table, computer_table, deck)
-            # play_a_round(active_player) 
 
     else:
         requested_card = determine_computer_request_value()
@@ -210,8 +204,6 @@ def play_a_round(active_player):
             requested_card_value = check_player_hand_for_foak(requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             computer_foak.clear()  
-            # report_scores(user_table, computer_table, deck)
-            # play_a_round(active_player)
             
         else:
             if deck != []:
@@ -225,8 +217,6 @@ def play_a_round(active_player):
                 active_player = switch_active_player(active_player)
             else:
                 print("\nThere are no more cards left in the deck.\n")
-            # report_scores(user_table, computer_table, deck)
-            # play_a_round(active_player)
     report_scores(user_table, computer_table, deck, active_player, user_hand, computer_hand)
             
 
@@ -293,13 +283,11 @@ def check_player_hand_for_foak(requested_card, active_player):
         for i, elem in enumerate(user_hand):
             if requested_card_value in elem:
                 user_foak.append(user_hand[i])
-        print(user_foak)
         return requested_card_value
     else:
         for i, elem in enumerate(computer_hand):
             if requested_card_value in elem:
                 computer_foak.append(computer_hand[i])
-        print(computer_foak)
         return requested_card_value
 
 
@@ -380,14 +368,26 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
     Determines the winner once one player has an empty hand by counting and comparing the number of foak for each player.
     """
     if len(user_table) > len(computer_table):
+        print("\n")
+        print("\n")
         print("You win!!")
+        print("\n")
+        print("\n")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
 
     elif len(computer_table) > len(user_table):
+        print("\n")
+        print("\n")
         print("The computer won.")
+        print("\n")
+        print("\n")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
     else:
+        print("\n")
+        print("\n")
         print("Looks like it is a draw.")
+        print("\n")
+        print("\n")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
 
 
