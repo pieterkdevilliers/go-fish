@@ -90,7 +90,7 @@ def explain_game_rules():
     """
     print("Here are the rules of the game:\n")
     print("The aim of the game is to end with the most Four Of A Kind sets on the table and an empty hand.\n")
-    print("You and the computer will take turns in asking each other for a card value.")
+    print("You and the computer will take turns in asking each other for a card value. NOTE: You only request the card value, NOT the card suit, Example: If you want to know if the computer holds a 7, you only request 7, not 7 of Hearts etc...")
     print("If the other player has the card requested, then it is handed over and the player requests another card.\n")
     print("If the other player does not have the requested card, the active player draws a card from the deck, and the other player has the next turn.\n")
     print("The winner is the first player with an empty hand, provided that player also has the highest number of Four Of A Kind sets on the table.\n")
@@ -352,9 +352,8 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
     """
     Reports the scores for each player at the end of each round. This only happens once at least one player has a foak.
     """
-    print("************************ SCORE REPORT ***********************\n")
     if user_hand != [] and computer_hand != []:
-        print("************************\n")
+        print("************************ SCORE REPORT ***********************\n")
         if len(user_table) != 0:
             print("\n")
             print("\n")
@@ -400,6 +399,78 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print("\n")
         print("\n")
         print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+    play_another_round()
+
+def play_another_round():
+    """
+    Offers the player the chance to play again
+    """
+    play_another_round = input("Would you like to play again? Type Yes or No")
+    if play_another_round == "Yes":
+
+        deck = [
+            "Ace of Hearts",
+            "2 of Hearts",
+            "3 of Hearts",
+            "4 of Hearts",
+            "5 of Hearts",
+            "6 of Hearts",
+            "7 of Hearts",
+            "8 of Hearts",
+            "9 of Hearts",
+            "10 of Hearts",
+            "Jack of Hearts",
+            "Queen of Hearts",
+            "King of Hearts",
+            "Ace of Diamonds",
+            "2 of Diamonds",
+            "3 of Diamonds",
+            "4 of Diamonds",
+            "5 of Diamonds",
+            "6 of Diamonds",
+            "7 of Diamonds",
+            "8 of Diamonds",
+            "9 of Diamonds",
+            "10 of Diamonds",
+            "Jack of Diamonds",
+            "Queen of Diamonds",
+            "King of Diamonds",
+            "Ace of Clubs",
+            "2 of Clubs",
+            "3 of Clubs",
+            "4 of Clubs",
+            "5 of Clubs",
+            "6 of Clubs",
+            "7 of Clubs",
+            "8 of Clubs",
+            "9 of Clubs",
+            "10 of Clubs",
+            "Jack of Clubs",
+            "Queen of Clubs",
+            "King of Clubs",
+            "Ace of Spades",
+            "2 of Spades",
+            "3 of Spades",
+            "4 of Spades",
+            "5 of Spades",
+            "6 of Spades",
+            "7 of Spades",
+            "8 of Spades",
+            "9 of Spades",
+            "10 of Spades",
+            "Jack of Spades",
+            "Queen of Spades",
+            "King of Spades"
+            ]
+        user_hand = []
+        computer_hand = []
+        user_foak = []
+        computer_foak = []
+        user_table = {}
+        computer_table = {}
+        deal_cards()
+    else:
+        print("Thanks for playing!")
 
 
 def main():
