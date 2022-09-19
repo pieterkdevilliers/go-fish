@@ -89,9 +89,11 @@ def explain_game_rules():
     Explain the rules of the game, and get user to start the game, when ready.
     """
     print("Here are the rules of the game:\n")
-    print("Rule 1\n")
-    print("Rule 2\n")
-    print("Rule 3\n")
+    print("The aim of the game is to end with the most Four Of A Kind sets on the table and an empty hand.\n")
+    print("You and the computer will take turns in asking each other for a card value.")
+    print("If the other player has the card requested, then it is handed over and the player requests another card.\n")
+    print("If the other player does not have the requested card, the active player draws a card from the deck, and the other player has the next turn.\n")
+    print("The winner is the first player with an empty hand, provided that player also has the highest number of Four Of A Kind sets on the table.\n")
 
     player_status = input("If you are ready to begin, type GO! below:\n")
     if player_status == "GO!":
@@ -350,6 +352,7 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
     """
     Reports the scores for each player at the end of each round. This only happens once at least one player has a foak.
     """
+    print("************************ SCORE REPORT ***********************\n")
     if user_hand != [] and computer_hand != []:
         print("************************\n")
         if len(user_table) != 0:
