@@ -350,11 +350,16 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
     """
     if user_hand != [] and computer_hand != []:
         if len(user_table) != 0:
+            print("\n")
+            print("\n")
             print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
+            print("\n")
             print("Your Four Of A Kinds are:")
             print(user_table)
             print("\n")
+            print("\n")
             print(f"The computer has {len(computer_table)} on the table as it's Four Of A Kinds.\n")
+            print("\n")
             print("The computer's Four Of A Kinds are:")
             print(computer_table)
 
