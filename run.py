@@ -2,7 +2,6 @@
 
 import random
 import itertools
-import re
 import time
 
 
@@ -89,11 +88,11 @@ def explain_game_rules():
     Explain the rules of the game, and get user to start the game, when ready.
     """
     print("Here are the rules of the game:\n")
-    print("The aim of the game is to end with the most Four Of A Kind sets on the table and an empty hand.\n")
-    print("You and the computer will take turns in asking each other for a card value. NOTE: You only request the card value, NOT the card suit, Example: If you want to know if the computer holds a 7, you only request 7, not 7 of Hearts etc...")
-    print("If the other player has the card requested, then it is handed over and the player requests another card.\n")
-    print("If the other player does not have the requested card, the active player draws a card from the deck, and the other player has the next turn.\n")
-    print("The winner is the first player with an empty hand, provided that player also has the highest number of Four Of A Kind sets on the table.\n")
+    print("1 - The aim of the game is to end with the most Four Of A Kind sets on the table and an empty hand.\n")
+    print("2 - You and the computer will take turns in asking each other for a card value. NOTE: You only request the card value, NOT the card suit, Example: If you want to know if the computer holds a 7, you only request 7, not 7 of Hearts etc...")
+    print("3 - If the other player has the card requested, then it is handed over and the player requests another card.\n")
+    print("4 - If the other player does not have the requested card, the active player draws a card from the deck, and the other player has the next turn.\n")
+    print("5 - The winner is the first player with an empty hand, provided that player also has the highest number of Four Of A Kind sets on the table.\n")
 
     player_status = input("If you are ready to begin, type GO! below:\n")
     if player_status == "GO!":
@@ -170,12 +169,17 @@ def play_a_round(active_player):
         print("You hold these cards in your hand:\n")
         print(user_hand)
         requested_card = input("\nWhich card do you want to request?\n")
-        card_check = any(card.startswith(f"{requested_card}") for card in computer_hand)
+        card_check = any(card.startswith(
+            f"{requested_card}") for card in computer_hand)
         if card_check is True:
-            requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, computer_hand)))
-            requested_card = hand_over_requested_card(requested_card_index, active_player)
-            requested_card = add_card_to_player_hand(requested_card, active_player)
-            requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+            requested_card_index = len(tuple(itertools.takewhile(lambda x: (
+                f"{requested_card}") not in x, computer_hand)))
+            requested_card = hand_over_requested_card(
+                requested_card_index, active_player)
+            requested_card = add_card_to_player_hand(
+                requested_card, active_player)
+            requested_card_value = check_player_hand_for_foak(
+                requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
             
@@ -186,7 +190,8 @@ def play_a_round(active_player):
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
-                requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+                requested_card_value = check_player_hand_for_foak(
+                    requested_card, active_player)
                 confirm_player_foak(requested_card_value, active_player)
                 active_player = switch_active_player(active_player)
             else:
@@ -200,15 +205,20 @@ def play_a_round(active_player):
         print(f"The card requested by the computer was: {requested_card}")
         time.sleep(0.5)
 
-        card_check = any(card.startswith(f"{requested_card}") for card in user_hand)
+        card_check = any(card.startswith(
+            f"{requested_card}") for card in user_hand)
 
         if card_check is True:
-            requested_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card}") not in x, user_hand)))
-            requested_card = hand_over_requested_card(requested_card_index, active_player)
-            requested_card = add_card_to_player_hand(requested_card, active_player)
-            requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+            requested_card_index = len(tuple(itertools.takewhile(lambda x: (
+                f"{requested_card}") not in x, user_hand)))
+            requested_card = hand_over_requested_card(
+                requested_card_index, active_player)
+            requested_card = add_card_to_player_hand(
+                requested_card, active_player)
+            requested_card_value = check_player_hand_for_foak(
+                requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
-            computer_foak.clear()  
+            computer_foak.clear()
             
         else:
             if deck != []:
@@ -217,12 +227,15 @@ def play_a_round(active_player):
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
-                requested_card_value = check_player_hand_for_foak(requested_card, active_player)
+                requested_card_value = check_player_hand_for_foak(
+                    requested_card, active_player)
                 confirm_player_foak(requested_card_value, active_player)
                 active_player = switch_active_player(active_player)
             else:
                 print("\nThere are no more cards left in the deck.\n")
-    report_scores(user_table, computer_table, deck, active_player, user_hand, computer_hand)
+    report_scores(
+        user_table, computer_table, deck, active_player, user_hand,
+        computer_hand)
             
 
 def hand_over_requested_card(requested_card_index, active_player):
@@ -261,8 +274,10 @@ def determine_computer_request_value():
     Determines the card value the computer is asking the user for. 
     """
     if len(computer_hand) != 1:
-        computer_requested_card_position = random.randint(0, (len(computer_hand) - 1))
-        computer_requested_card = computer_hand[computer_requested_card_position]
+        computer_requested_card_position = random.randint(
+            0, (len(computer_hand) - 1))
+        computer_requested_card = computer_hand[
+            computer_requested_card_position]
     else:
         computer_requested_card = computer_hand[0]
     computer_request_value = computer_requested_card.split(maxsplit=1)
@@ -306,7 +321,8 @@ def confirm_player_foak(requested_card_value, active_player):
             print("\nCongratulations! You have a Four Of A Kind\n")
             print("\nYour Four Of A Kinds Are:\n")
             print(user_table)
-            identify_foak_index_from_player_hand(requested_card_value, active_player)
+            identify_foak_index_from_player_hand(
+                requested_card_value, active_player)
             user_foak.clear()
         else:
             user_foak.clear()
@@ -316,7 +332,8 @@ def confirm_player_foak(requested_card_value, active_player):
             print("\nThe Computer has a Four Of A Kind\n")
             print("\nThe Computer's Four Of A Kinds Are:\n")
             print(computer_table)
-            identify_foak_index_from_player_hand(requested_card_value, active_player)
+            identify_foak_index_from_player_hand(
+                requested_card_value, active_player)
             computer_foak.clear()
         else:
             computer_foak.clear()
@@ -329,13 +346,15 @@ def identify_foak_index_from_player_hand(requested_card_value, active_player):
     if active_player == "user":
         for card in user_hand[:]:
             if requested_card_value in card:
-                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, user_hand)))
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (
+                    f"{requested_card_value}") not in x, user_hand)))
                 delete_foak_from_player_hand(foak_card_index, active_player)
     else:
         for card in computer_hand[:]:
             if requested_card_value in card:
 
-                foak_card_index = len(tuple(itertools.takewhile(lambda x: (f"{requested_card_value}") not in x, computer_hand)))
+                foak_card_index = len(tuple(itertools.takewhile(lambda x: (
+                    f"{requested_card_value}") not in x, computer_hand)))
                 delete_foak_from_player_hand(foak_card_index, active_player)
 
 
