@@ -157,6 +157,8 @@ def pull_card_from_deck():
 def add_card_to_player_hand(selected_card, active_player):
     """
     Adds the selected card to the active_player's hand list.
+    :param selected_card: The card selected from the deck EX: 3 of Hearts.
+    :param active_player: The player who's turn it is, user or computer.
     """
     requested_card_value = (selected_card.split(maxsplit=1)[0])
     if active_player == "user":
@@ -178,8 +180,9 @@ def select_next_card():
 
 def play_a_round(active_player):
     """
-    Determines if the opponent holds the requested card, and returns the \
-        card's index if True.
+    Determines if the opponent holds the requested card, and returns the
+    card's index if True.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         print("************************\n")
@@ -204,8 +207,8 @@ def play_a_round(active_player):
             
         else:
             if deck != []:
-                print("\nThe Computer doesn't have that card, you are taking \
-                    another card from the deck\n")
+                print("\nThe Computer doesn't have that card.")
+                print("You are taking another card from the deck\n")
                 time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
@@ -242,8 +245,8 @@ def play_a_round(active_player):
             
         else:
             if deck != []:
-                print("\nYou didn't have that card, the computer is taking \
-                    another card from the deck\n")
+                print("\nYou didn't have that card.")
+                print("The computer is taking another card from the deck\n")
                 time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
@@ -256,13 +259,15 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
     report_scores(
         user_table, computer_table, deck, active_player, user_hand,
-        computer_hand)
-            
+        computer_hand)          
+
 
 def hand_over_requested_card(requested_card_index, active_player):
     """
-    Receives the requested card's index and removes it from the \
-        in_active player's hand
+    Receives the requested card's index and removes it from the
+    in_active player's hand.
+    :param requested_card_index: The index of the requested card held by the opponent.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
@@ -279,8 +284,9 @@ def hand_over_requested_card(requested_card_index, active_player):
 
 def switch_active_player(active_player):
     """
-    Switches the active player beased on the existing \
-        active player, to change turns
+    Switches the active player beased on the existing
+    active player, to change turns.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         active_player = "computer"
@@ -309,7 +315,8 @@ def determine_computer_request_value():
 
 def determine_pulled_card_value(selected_card):
     """
-    Determines the card value of the new card drawn from the deck. 
+    Determines the card value of the new card drawn from the deck.
+    :param selected_card: The card selected from the deck EX: 3 of Hearts.
     """
     split_selected_card = selected_card.split(maxsplit=1)
     pulled_card_value = (split_selected_card[0])
@@ -320,6 +327,9 @@ def check_player_hand_for_foak(requested_card, active_player):
     """
     Updates foak list with request card matches from player's
     hand and adds to the temp foak list.
+    :param requested_card: Name and value of the card added to the player hand.
+    Ex: 3 of Hearts.
+    :param active_player: The player who's turn it is, user or computer.
     """
     requested_card_value = (requested_card.split(maxsplit=1)[0])
     if active_player == "user":
@@ -336,8 +346,11 @@ def check_player_hand_for_foak(requested_card, active_player):
 
 def confirm_player_foak(requested_card_value, active_player):
     """
-    Determines if player foak is full, if so, adds foak list \
-        to table and clears foak.
+    Determines if player foak is full, if so, adds foak list
+    to table and clears foak.
+    :param requested_card_value: The value of the card requested.
+    Ex: 3 or King.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         if len(user_foak) == 4:
@@ -365,8 +378,11 @@ def confirm_player_foak(requested_card_value, active_player):
 
 def identify_foak_index_from_player_hand(requested_card_value, active_player):
     """
-    Identifies and removes the foak cards from the player's hand \
-        after they were added to the player's table
+    Identifies and removes the foak cards from the player's hand
+    after they were added to the player's table.
+    :param requested_card_value: The value of the card requested.
+    Ex: 3 or King.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         for card in user_hand[:]:
@@ -385,7 +401,10 @@ def identify_foak_index_from_player_hand(requested_card_value, active_player):
 
 def delete_foak_from_player_hand(foak_card_index, active_player):
     """
-    Deletes identified foak card from player hand
+    Deletes identified foak card from player hand.
+    :param foak_card_index: The index of the identified foak
+    card to be removed from the players hand.
+    :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
         user_hand.pop(int(foak_card_index))
@@ -393,14 +412,21 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
         computer_hand.pop(int(foak_card_index))          
 
 
-def report_scores(user_table, computer_table, deck, active_player, 
-user_hand, computer_hand):
+def report_scores(user_table, computer_table, deck, active_player,
+    user_hand, computer_hand):
     """
-    Reports the scores for each player at the end of each round. \
-        This only happens once at least one player has a foak.
+    Reports the scores for each player at the end of each round.
+    This only happens once at least one player has a foak.
+    :param user_table: The list holding the Four Of A Kind lists for the user.
+    :param computer_table: The list holding the Four Of A Kind lists
+    for the computer.
+    :param deck: All the cards remaining in the deck.
+    :param active_player: The player who's turn it is, user or computer.
+    :param user_hand: The list of cards in the user's hand.
+    :param computer_hand: The list of cards in the computer's hand.
     """
     if user_hand != [] and computer_hand != []:
-        print("************************ SCORE REPORT ***********************\n")
+        print("********************** SCORE REPORT *********************\n")
         if len(user_table) != 0:
             print("\n")
             print("\n")
@@ -411,8 +437,8 @@ user_hand, computer_hand):
             print("\n")
             print("\n")
             time.sleep(2)
-            print(f"The computer has {len(computer_table)} on the table as \
-                it's Four Of A Kinds.\n")
+            print(f"The computer has {len(computer_table)} on the table as")
+            print("it's Four Of A Kinds.\n")
             print("\n")
             print("The computer's Four Of A Kinds are:")
             print(computer_table)
@@ -424,8 +450,13 @@ user_hand, computer_hand):
 
 def determine_winner(user_table, user_hand, computer_table, computer_hand):
     """
-    Determines the winner once one player has an empty hand by counting and \
-        comparing the number of foak for each player.
+    Determines the winner once one player has an empty hand by counting and
+    comparing the number of foak for each player.
+    :param user_table: The list holding the Four Of A Kind lists for the user.
+    :param computer_table: The list holding the Four Of A Kind lists
+    for the computer.
+    :param user_hand: The list of cards in the user's hand.
+    :param computer_hand: The list of cards in the computer's hand.
     """
     if len(user_table) > len(computer_table):
         print("\n")
@@ -459,8 +490,69 @@ def play_another_round():
     """
     Offers the player the chance to play again
     """
+    deck = [
+            "Ace of Hearts",
+            "2 of Hearts",
+            "3 of Hearts",
+            "4 of Hearts",
+            "5 of Hearts",
+            "6 of Hearts",
+            "7 of Hearts",
+            "8 of Hearts",
+            "9 of Hearts",
+            "10 of Hearts",
+            "Jack of Hearts",
+            "Queen of Hearts",
+            "King of Hearts",
+            "Ace of Diamonds",
+            "2 of Diamonds",
+            "3 of Diamonds",
+            "4 of Diamonds",
+            "5 of Diamonds",
+            "6 of Diamonds",
+            "7 of Diamonds",
+            "8 of Diamonds",
+            "9 of Diamonds",
+            "10 of Diamonds",
+            "Jack of Diamonds",
+            "Queen of Diamonds",
+            "King of Diamonds",
+            "Ace of Clubs",
+            "2 of Clubs",
+            "3 of Clubs",
+            "4 of Clubs",
+            "5 of Clubs",
+            "6 of Clubs",
+            "7 of Clubs",
+            "8 of Clubs",
+            "9 of Clubs",
+            "10 of Clubs",
+            "Jack of Clubs",
+            "Queen of Clubs",
+            "King of Clubs",
+            "Ace of Spades",
+            "2 of Spades",
+            "3 of Spades",
+            "4 of Spades",
+            "5 of Spades",
+            "6 of Spades",
+            "7 of Spades",
+            "8 of Spades",
+            "9 of Spades",
+            "10 of Spades",
+            "Jack of Spades",
+            "Queen of Spades",
+            "King of Spades"
+            ]
+    user_hand = []
+    computer_hand = []
+    user_foak = []
+    computer_foak = []
+    user_table = {}
+    computer_table = {}
+    active_player = "user"
     play_another_round = input("Would you like to play again? Type Yes or No\n")
-    if play_another_round == "Yes":
+    if play_another_round.lower() == "yes":
         deal_cards()
     else:
         print("Thanks for playing!")
