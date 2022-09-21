@@ -242,7 +242,8 @@ def play_a_round(active_player):
         print("It is your turn.\n")
         print("\n")
         print("You hold these cards in your hand:\n")
-        print(user_hand)
+        for card in user_hand:
+            print(CARD_IMAGES[card])
         requested_card = input("\nWhich card do you want to request?\n")
         card_check = any(card.startswith(
             f"{requested_card}") for card in computer_hand)
@@ -312,14 +313,15 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
     report_scores(
         user_table, computer_table, deck, active_player, user_hand,
-        computer_hand)          
+        computer_hand, requested_card_value)          
 
 
 def hand_over_requested_card(requested_card_index, active_player):
     """
     Receives the requested card's index and removes it from the
     in_active player's hand.
-    :param requested_card_index: The index of the requested card held by the opponent.
+    :param requested_card_index: The index of the requested card held
+    by the opponent.
     :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
@@ -408,9 +410,10 @@ def confirm_player_foak(requested_card_value, active_player):
     if active_player == "user":
         if len(user_foak) == 4:
             user_table[requested_card_value] = user_foak.copy()
-            print("\nCongratulations! You have a Four Of A Kind\n")
-            print("\nYour Four Of A Kinds Are:\n")
-            print(user_table)
+            # print("\nCongratulations! You have a Four Of A Kind\n")
+            # print("\nYour Four Of A Kinds Are:\n")
+            # for card in user_table:
+            #     print(CARD_IMAGES[card])
             identify_foak_index_from_player_hand(
                 requested_card_value, active_player)
             user_foak.clear()
@@ -419,9 +422,10 @@ def confirm_player_foak(requested_card_value, active_player):
     else:
         if len(computer_foak) == 4:
             computer_table[requested_card_value] = computer_foak.copy()
-            print("\nThe Computer has a Four Of A Kind\n")
-            print("\nThe Computer's Four Of A Kinds Are:\n")
-            print(computer_table)
+            # print("\nThe Computer has a Four Of A Kind\n")
+            # print("\nThe Computer's Four Of A Kinds Are:\n")
+            # for card in computer_table:
+            #     print(CARD_IMAGES[card])
             identify_foak_index_from_player_hand(
                 requested_card_value, active_player)
             computer_foak.clear()
@@ -466,7 +470,7 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
 
 
 def report_scores(user_table, computer_table, deck, active_player,
-    user_hand, computer_hand):
+    user_hand, computer_hand, requested_card_value):
     """
     Reports the scores for each player at the end of each round.
     This only happens once at least one player has a foak.
@@ -486,7 +490,13 @@ def report_scores(user_table, computer_table, deck, active_player,
             print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
             print("\n")
             print("Your Four Of A Kinds are:")
-            print(user_table)
+            # print(user_table)
+            for suit in user_table:
+                for card in user_table[suit]:
+                    print(CARD_IMAGES[card])
+                print("**********************\n")
+
+        if len(computer_table) != 0:        
             print("\n")
             print("\n")
             time.sleep(2)
@@ -494,7 +504,11 @@ def report_scores(user_table, computer_table, deck, active_player,
             print("it's Four Of A Kinds.\n")
             print("\n")
             print("The computer's Four Of A Kinds are:")
-            print(computer_table)
+            # print(computer_table)
+            for suit in computer_table:
+                for card in computer_table[suit]:
+                    print(CARD_IMAGES[card])
+                print("**********************\n")
 
         play_a_round(active_player)
     else:
@@ -543,72 +557,7 @@ def play_another_round():
     """
     Offers the player the chance to play again
     """
-    deck = [
-            "Ace of Hearts",
-            "2 of Hearts",
-            "3 of Hearts",
-            "4 of Hearts",
-            "5 of Hearts",
-            "6 of Hearts",
-            "7 of Hearts",
-            "8 of Hearts",
-            "9 of Hearts",
-            "10 of Hearts",
-            "Jack of Hearts",
-            "Queen of Hearts",
-            "King of Hearts",
-            "Ace of Diamonds",
-            "2 of Diamonds",
-            "3 of Diamonds",
-            "4 of Diamonds",
-            "5 of Diamonds",
-            "6 of Diamonds",
-            "7 of Diamonds",
-            "8 of Diamonds",
-            "9 of Diamonds",
-            "10 of Diamonds",
-            "Jack of Diamonds",
-            "Queen of Diamonds",
-            "King of Diamonds",
-            "Ace of Clubs",
-            "2 of Clubs",
-            "3 of Clubs",
-            "4 of Clubs",
-            "5 of Clubs",
-            "6 of Clubs",
-            "7 of Clubs",
-            "8 of Clubs",
-            "9 of Clubs",
-            "10 of Clubs",
-            "Jack of Clubs",
-            "Queen of Clubs",
-            "King of Clubs",
-            "Ace of Spades",
-            "2 of Spades",
-            "3 of Spades",
-            "4 of Spades",
-            "5 of Spades",
-            "6 of Spades",
-            "7 of Spades",
-            "8 of Spades",
-            "9 of Spades",
-            "10 of Spades",
-            "Jack of Spades",
-            "Queen of Spades",
-            "King of Spades"
-            ]
-    user_hand = []
-    computer_hand = []
-    user_foak = []
-    computer_foak = []
-    user_table = {}
-    computer_table = {}
-    active_player = "user"
-    play_another_round = input("Would you like to play again? Type Yes or No\n")
-    if play_another_round.lower() == "yes":
-        deal_cards()
-    else:
-        print("Thanks for playing!")
+    print("Click the `Run Program` button to play again")
 
 
 def main():
