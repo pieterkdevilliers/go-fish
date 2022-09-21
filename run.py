@@ -85,25 +85,43 @@ def request_player_name():
 
 def explain_game_rules():
     """
-    Explain the rules of the game, and get user to start the game, when ready.
+    Explain the rules of the game.
     """
     print("Here are the rules of the game:\n")
-    print("1 - The aim of the game is to end with the most Four Of A Kind sets on the table and an empty hand.\n")
-    print("2 - You and the computer will take turns in asking each other for a card value. NOTE: You only request the card value, NOT the card suit, Example: If you want to know if the computer holds a 7, you only request 7, not 7 of Hearts etc...")
-    print("3 - If the other player has the card requested, then it is handed over and the player requests another card.\n")
-    print("4 - If the other player does not have the requested card, the active player draws a card from the deck, and the other player has the next turn.\n")
-    print("5 - The winner is the first player with an empty hand, provided that player also has the highest number of Four Of A Kind sets on the table.\n")
+    print("1 - The aim of the game is to end with the most Four Of A Kind")
+    print("sets on the table and an empty hand.\n")
+    print("2 - You and the computer will take turns in asking each other")
+    print("for acard value. NOTE: You only request the card value,")
+    print("NOT the card suit.")
+    print("Example: If you want to know if the computer holds a 7,")
+    print("you only request 7, not 7 of Hearts etc...")
+    print("3 - If the other player has the card requested, then it is handed")
+    print("over and the player requests another card.\n")
+    print("4 - If the other player does not have the requested card, the")
+    print("active player draws a card from the deck,")
+    print("and the other player has the next turn.\n")
+    print("5 - The winner is the first player with an empty hand, provided")
+    print("that player also has the highest number of")
+    print("Four Of A Kind sets on the table.\n")
+    start_game()
 
-    player_status = input("If you are ready to begin, type GO! below:\n")
-    if player_status == "GO!":
+
+def start_game():
+    """
+    Gets user to start the game, when ready.
+    """
+    player_status = input("If you are ready to begin, press ENTER:\n")
+    if player_status == '':
         deal_cards()
     else:
-        player_status = input("That command is not recognised. In order to start the game type GO! below:\n")
+        print("Command not recognised")
+        start_game()
 
 
 def deal_cards():
     """
-    Deals the cards by randomly selecting 7 cards for the user and 7 cards for the computer.
+    Deals the cards by randomly selecting 7 cards for the user and 7 cards for\
+        the computer.
     This will remove them from the deck list and add 7 cards to the user_hand
     list and 7 cards to the computer_hand list
     """
@@ -160,7 +178,8 @@ def select_next_card():
 
 def play_a_round(active_player):
     """
-    Determines if the opponent holds the requested card, and returns the card's index if True.
+    Determines if the opponent holds the requested card, and returns the \
+        card's index if True.
     """
     if active_player == "user":
         print("************************\n")
@@ -185,7 +204,8 @@ def play_a_round(active_player):
             
         else:
             if deck != []:
-                print("\nThe Computer doesn't have that card, you are taking another card from the deck\n")
+                print("\nThe Computer doesn't have that card, you are taking \
+                    another card from the deck\n")
                 time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
@@ -222,7 +242,8 @@ def play_a_round(active_player):
             
         else:
             if deck != []:
-                print("\nYou didn't have that card, the computer is taking another card from the deck\n")
+                print("\nYou didn't have that card, the computer is taking \
+                    another card from the deck\n")
                 time.sleep(2)
                 selected_card = pull_card_from_deck()
                 add_card_to_player_hand(selected_card, active_player)
@@ -240,7 +261,8 @@ def play_a_round(active_player):
 
 def hand_over_requested_card(requested_card_index, active_player):
     """
-    Receives the requested card's index and removes it from the in_active player's hand
+    Receives the requested card's index and removes it from the \
+        in_active player's hand
     """
     if active_player == "user":
         print("\nThe computer is handing over the card you requested\n")
@@ -257,7 +279,8 @@ def hand_over_requested_card(requested_card_index, active_player):
 
 def switch_active_player(active_player):
     """
-    Switches the active player beased on the existing active player, to change turns
+    Switches the active player beased on the existing \
+        active player, to change turns
     """
     if active_player == "user":
         active_player = "computer"
@@ -313,7 +336,8 @@ def check_player_hand_for_foak(requested_card, active_player):
 
 def confirm_player_foak(requested_card_value, active_player):
     """
-    Determines if player foak is full, if so, adds foak list to table and clears foak.
+    Determines if player foak is full, if so, adds foak list \
+        to table and clears foak.
     """
     if active_player == "user":
         if len(user_foak) == 4:
@@ -341,7 +365,8 @@ def confirm_player_foak(requested_card_value, active_player):
 
 def identify_foak_index_from_player_hand(requested_card_value, active_player):
     """
-    Identifies and removes the foak cards from the player's hand after they were added to the player's table
+    Identifies and removes the foak cards from the player's hand \
+        after they were added to the player's table
     """
     if active_player == "user":
         for card in user_hand[:]:
@@ -368,9 +393,11 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
         computer_hand.pop(int(foak_card_index))          
 
 
-def report_scores(user_table, computer_table, deck, active_player, user_hand, computer_hand):
+def report_scores(user_table, computer_table, deck, active_player, 
+user_hand, computer_hand):
     """
-    Reports the scores for each player at the end of each round. This only happens once at least one player has a foak.
+    Reports the scores for each player at the end of each round. \
+        This only happens once at least one player has a foak.
     """
     if user_hand != [] and computer_hand != []:
         print("************************ SCORE REPORT ***********************\n")
@@ -384,7 +411,8 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
             print("\n")
             print("\n")
             time.sleep(2)
-            print(f"The computer has {len(computer_table)} on the table as it's Four Of A Kinds.\n")
+            print(f"The computer has {len(computer_table)} on the table as \
+                it's Four Of A Kinds.\n")
             print("\n")
             print("The computer's Four Of A Kinds are:")
             print(computer_table)
@@ -396,7 +424,8 @@ def report_scores(user_table, computer_table, deck, active_player, user_hand, co
 
 def determine_winner(user_table, user_hand, computer_table, computer_hand):
     """
-    Determines the winner once one player has an empty hand by counting and comparing the number of foak for each player.
+    Determines the winner once one player has an empty hand by counting and \
+        comparing the number of foak for each player.
     """
     if len(user_table) > len(computer_table):
         print("\n")
@@ -404,7 +433,8 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print("You win!!")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the \
+            computer has {len(computer_table)}.")
 
     elif len(computer_table) > len(user_table):
         print("\n")
@@ -412,14 +442,16 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print("The computer won.")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the \
+            computer has {len(computer_table)}.")
     else:
         print("\n")
         print("\n")
         print("Looks like it is a draw.")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the \
+            computer has {len(computer_table)}.")
     play_another_round()
 
 
