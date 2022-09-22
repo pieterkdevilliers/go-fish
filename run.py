@@ -238,10 +238,9 @@ def play_a_round(active_player):
     :param active_player: The player who's turn it is, user or computer.
     """
     if active_player == "user":
-        print("************************\n")
         print("It is your turn.\n")
-        print("\n")
         print("You hold these cards in your hand:\n")
+        user_hand.sort()
         for card in user_hand:
             print(CARD_IMAGES[card])
         requested_card = input("\nWhich card do you want to request?\n")
@@ -275,7 +274,6 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
 
     else:
-        print("************************\n")
         requested_card = determine_computer_request_value()
         print("The Computer is choosing a card to request\n")
         time.sleep(2)
@@ -410,10 +408,6 @@ def confirm_player_foak(requested_card_value, active_player):
     if active_player == "user":
         if len(user_foak) == 4:
             user_table[requested_card_value] = user_foak.copy()
-            # print("\nCongratulations! You have a Four Of A Kind\n")
-            # print("\nYour Four Of A Kinds Are:\n")
-            # for card in user_table:
-            #     print(CARD_IMAGES[card])
             identify_foak_index_from_player_hand(
                 requested_card_value, active_player)
             user_foak.clear()
@@ -422,10 +416,6 @@ def confirm_player_foak(requested_card_value, active_player):
     else:
         if len(computer_foak) == 4:
             computer_table[requested_card_value] = computer_foak.copy()
-            # print("\nThe Computer has a Four Of A Kind\n")
-            # print("\nThe Computer's Four Of A Kinds Are:\n")
-            # for card in computer_table:
-            #     print(CARD_IMAGES[card])
             identify_foak_index_from_player_hand(
                 requested_card_value, active_player)
             computer_foak.clear()
@@ -490,7 +480,6 @@ def report_scores(user_table, computer_table, deck, active_player,
             print(f"You have {len(user_table)} on the table as Four Of A Kinds.\n")
             print("\n")
             print("Your Four Of A Kinds are:")
-            # print(user_table)
             for suit in user_table:
                 for card in user_table[suit]:
                     print(CARD_IMAGES[card])
@@ -504,7 +493,6 @@ def report_scores(user_table, computer_table, deck, active_player,
             print("it's Four Of A Kinds.\n")
             print("\n")
             print("The computer's Four Of A Kinds are:")
-            # print(computer_table)
             for suit in computer_table:
                 for card in computer_table[suit]:
                     print(CARD_IMAGES[card])
@@ -573,3 +561,4 @@ def main():
 # Start main game running
 
 main()
+
