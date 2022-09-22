@@ -124,18 +124,6 @@ user_table = {}
 computer_table = {}
 
 
-def request_player_name():
-    """
-    Requests the user's name in order to start the game.
-    """
-    while True:
-        print("To start the game, please enter your name:\n")
-
-        player_name = input("Enter your name:\n")
-        print(f"Welcome {player_name}!\n")
-        return player_name
-
-
 def explain_game_rules():
     """
     Explain the rules of the game.
@@ -147,7 +135,8 @@ def explain_game_rules():
     print("for acard value. NOTE: You only request the card value,")
     print("NOT the card suit.")
     print("Example: If you want to know if the computer holds a 7,")
-    print("you only request 7, not 7 of Hearts etc...")
+    print("you only request 7, not 7 of Hearts  or Queen and not")
+    print("Queen of Diamonds etc...\n")
     print("3 - If the other player has the card requested, then it is handed")
     print("over and the player requests another card.\n")
     print("4 - If the other player does not have the requested card, the")
@@ -519,8 +508,8 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print("You win!!")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the \
-            computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the")
+        print("computer has {len(computer_table)}.")
 
     elif len(computer_table) > len(user_table):
         print("\n")
@@ -528,16 +517,16 @@ def determine_winner(user_table, user_hand, computer_table, computer_hand):
         print("The computer won.")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the \
-            computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the")
+        print("computer has {len(computer_table)}.")
     else:
         print("\n")
         print("\n")
         print("Looks like it is a draw.")
         print("\n")
         print("\n")
-        print(f"You have {len(user_table)} four of a kinds and the \
-            computer has {len(computer_table)}.")
+        print(f"You have {len(user_table)} four of a kinds and the")
+        print("computer has {len(computer_table)}.")
     play_another_round()
 
 
@@ -552,7 +541,6 @@ def main():
     """
     Runs the main functions of the game.
     """
-    request_player_name()
     explain_game_rules()
     print("\n")
     active_player = "user"
