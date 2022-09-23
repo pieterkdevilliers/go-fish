@@ -1,31 +1,119 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Story Vault
 
-Welcome pieterkdevilliers,
+[View the live project here.](https://story-vault.herokuapp.com/)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![](https://github.com/MiaTothova/story-vault/blob/main/images/responsive.png)
+The image is from [Am I responsive?](http://ami.responsivedesign.is/)
 
-## Reminders
+Story Vault is a terminal-based story generator designed mainly for children 7 years and up. It was designed to provide a fun environment in which the children can create stories very much like Madlibs. They select words provided from the terminal and the story is created for them. They can play as much as they like until they decide to end the game.
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## UX
+I aimed to create a story generator game for children that is fun and is very easy to manipulate and input data.
 
-## Creating the Heroku app
+#### The ideal client:
+* Children
+* Adults
+* English Speaking
+* Readers
+* People who like silly stories
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### The game will help clients to:
+* Navigate easily through the terminal
+* Test their reading skills
+* Improve their imagination
+* Provide entertainment
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Owner Stories
+1. As the owner, I want the game to be fun and make the user to keep returning.
+2. As the owner, I want the game to be educational.
+3. As the owner, I want to show my new learned skills with Python.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### User Stories
+1. As a new visitor, I want to easily navigate the terminal to play the game.
+2. As a visitor, I want to be able to exit the game when I get tired of playing.
+3. As a visitor, I want to be create and read fun stories.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## The skeleton
+The Game consists of only 1 page which is the terminal page. I am using Python to generate the data and create stories.
+* The terminal game is not responsive and is only 1 page therefore wireframes were not needed this time.
+![](https://github.com/MiaTothova/story-vault/blob/main/images/chart.png)
 
-Connect your GitHub repository and deploy as normal.
+## The Scope
+To achieve my goal, I included the following features in my game:
 
-## Constraints
+### Features
+1. A welcoming message asking the user to enter his/her name.
+2. List of 4 stories in the library which I can keep adding to.
+3. A List of words like adjectives and verbs from which the user can select and then these words are returned into the stories.
+4. The user has a choice to end the game by selecting 5.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Future features
+I ran out of time to implement these changes, I will implement them in the future:
+* Form validation: The input required in the "name" box.
+* Save score option.
+* Top 5 high scores board.
 
------
-Happy coding!
+## The Design
+It is a children's game therefore the graphics are very child-friendly. Each story has its own image based on the title eg. place for "taco story" (I could not find a ASCII image for a taco), Pizza for "Pizza story",Teddy bear for "About me" and a Butterfly for "Butterflies".
+* I have imported 'Time' which has allowed me to put a time break on how fast the text appeares in the terminal. Eg. there is a time.sleep(10) after a story which will take 10seconds before another selection for a story is possible. Giving the user a bit of time to read. Otherwise, everything would appear at the same time in the terminal.   
+
+## Technologies Used
+* [Gitpod](https://gitpod.io/workspaces) I used this developer to write the code for this game.
+* [Github](https://github.com/) Was used to host my repository and readme.
+* [Heroku](https://id.heroku.com/login)To host my app and deploy here.
+* [pep8online.com](http://pep8online.com/) To validate my code and check for errors
+
+## Testing
+1. As a new visitor, I want to easily navigate the terminal to play the game.
+* Here the user inputs his/her name and press enter.
+* Then they get a selection of stories from which they can choose by selecting a number
+![](https://github.com/MiaTothova/story-vault/blob/main/images/test-1.png)
+
+2. As a visitor, I want to be able to exit the game when I get tired of playing..
+* When user selects 5 they get a exit message.
+![](https://github.com/MiaTothova/story-vault/blob/main/images/test-2.png)
+
+3. As a visitor, I want to be create and read fun stories.
+* After imputing words a fun story is created.
+![](https://github.com/MiaTothova/story-vault/blob/main/images/test-3.png) 
+
+ ### Adicional Testing
+* I continously used the pep8online linter to confirm my code is problem-free
+* I used and tested in the gitpod terminal replaying and fixing issues until I got it right.
+* Tested on the Heroku terminal as I set up automatic deployment so I was able to see exactly how the game was generated.
+
+ ## Compatibility
+To ensure that a broad range of users can successfully view/use the site, I tested it across all major browsers on both desktop and mobile.
+* Chrome
+* Mozila Firefox
+* Edge
+* Internet explorer
+* Safari
+Although this is a web app it is visible on a mobile and tablets, even though it is not responsive.
+
+## Validation
+![](https://github.com/MiaTothova/story-vault/blob/main/images/pep8.png)
+
+## Deployment
+This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/MiaTothova/story-vault)
+
+To deploy this page to Heroku from GitHub repository, the following steps were taken:
+
+1. In the Heroku dashboard I selected 'New' in the top right hand corner and clicked on 'Create new app'.
+2. Then I Created the App name and Choose my region as Europe. Then selected 'Create app'
+4. Then I selected Settings tab, and scrolled down to 'Buildpacks'. Here I added 'Python' clicked saved changes and then selected 'Node.js' and saved my changes again.
+5. On top of the page I clicked on the 'Deploy' section, and I selected Github as my deployment method.
+6. Then I selected 'Connect to Github, and searched for my repository name and clicked on 'Connect' to link my Heroku app to my Github repository code.
+7. Scrolling down I have selected 'Enable Automatic Deploys' and after this I selected 'Deploy Branch' to deploy my project. I had to wait for it to build.
+8. After it has successfully deployed a 'view' button appeared which took me to my deployed app.
+
+## Credits
+* With this project everything seemed pretty straightforward. 
+* I have used youtube and google search to look up inspirations on how to aproach a Madlib game. I have not copied or reused anyone else's code in this project. 
+* I have watched the following videos for inspiration:
+   1. [Mad Libs Game](https://www.youtube.com/watch?v=u7g9mRzQLYE&t=2s)
+   2. [Build a Mad Libs Generator](https://www.youtube.com/watch?v=vFNZvZSOqlY&t=2s)
+* [This site was used to get my templates for my stories](https://www.glowwordbooks.com/blog/category/kids-online-mad-libs/) 
+* [This website was used to get ASCII code for my images](https://www.asciiart.eu/)
+* My Mentor Guido Cecilio Garcia Bernal was extremely helpful in breaking all the steps down for me and answering any questions I had Especially in regards to the dictionary.
+* Kasia Bogucka our Cohort Facilitator was very hepful in answering questions and providing us with information from Code Institute.
