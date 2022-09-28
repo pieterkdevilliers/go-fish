@@ -37,47 +37,42 @@ The game consists of a single page terminal interface, generated with Python.
 ![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/313bb83a79a02dfc8d3dc4753537a5d2422c9ef4/docs/images/readme-images/flow-diagram.webp)
 
 ## The Scope
-To achieve my goal, I included the following features in my game:
+The includes the following features:
 
 ### Features
-1. A welcoming message asking the user to enter his/her name.
-2. List of 4 stories in the library which I can keep adding to.
-3. A List of words like adjectives and verbs from which the user can select and then these words are returned into the stories.
-4. The user has a choice to end the game by selecting 5.
+1. A welcome message explaining the rules of the game.
+2. Simple in-game notifications confirming who's run it is, what cards are held and requested.
+3. In-game score report, showing the status of each player's Four Of A Kind table.
+4. The user can easily play another game by clicking the `Run Program` button in the interface.
 
 ### Future features
-I ran out of time to implement these changes, I will implement them in the future:
-* Form validation: The input required in the "name" box.
-* Save score option.
-* Top 5 high scores board.
+In the future I would like to add the following features:
+* Multi-player - ability to have more than one player against the computer.
+* Improved deck / hand display, although this might be limited by the terminal output.
 
 ## The Design
-It is a children's game therefore the graphics are very child-friendly. Each story has its own image based on the title eg. place for "taco story" (I could not find a ASCII image for a taco), Pizza for "Pizza story",Teddy bear for "About me" and a Butterfly for "Butterflies".
-* I have imported 'Time' which has allowed me to put a time break on how fast the text appeares in the terminal. Eg. there is a time.sleep(10) after a story which will take 10seconds before another selection for a story is possible. Giving the user a bit of time to read. Otherwise, everything would appear at the same time in the terminal.   
+As this is a childrens game, the interface and the game format is kept simple.
+* I imported `time` to allow for a slowed-down display of the terminal message, to help with keeping track of where the game is up to.
 
 ## Technologies Used
-* [Gitpod](https://gitpod.io/workspaces) I used this developer to write the code for this game.
-* [Github](https://github.com/) Was used to host my repository and readme.
-* [Heroku](https://id.heroku.com/login)To host my app and deploy here.
+* [Gitpod](https://gitpod.io/workspaces) - Used for writing the code and git management.
+* [Github](https://github.com/) - Used to host the repository.
+* [Heroku](https://id.heroku.com/login) - Used to host the live game.
 * [pep8online.com](http://pep8online.com/) To validate my code and check for errors
 
 ## Testing
 1. As a new visitor, I want to easily navigate the terminal to play the game.
-* Here the user inputs his/her name and press enter.
-* Then they get a selection of stories from which they can choose by selecting a number
+* Once the user has read the rules, they only need to press `Enter` in order to start the game.
+* The user then receives a notice that the cards are being dealt, as well as a list of the cards they now hold in their hand.
 ![](https://github.com/MiaTothova/story-vault/blob/main/images/test-1.png)
 
-2. As a visitor, I want to be able to exit the game when I get tired of playing..
-* When user selects 5 they get a exit message.
+2. As a visitor, I want to challenge myself to try and beat the computer.
+* The player does not know what cards the Computer holds, but because the computer and the player can only request a card to a value of at least one of the cards they already hold, the player can infer what cards the computer has, based on past requests from the computer.
 ![](https://github.com/MiaTothova/story-vault/blob/main/images/test-2.png)
 
-3. As a visitor, I want to be create and read fun stories.
-* After imputing words a fun story is created.
-![](https://github.com/MiaTothova/story-vault/blob/main/images/test-3.png) 
-
- ### Adicional Testing
-* I continously used the pep8online linter to confirm my code is problem-free
-* I used and tested in the gitpod terminal replaying and fixing issues until I got it right.
+ ### Additional Testing
+* I used the pep8online linter to review my code and highlight issues.
+* I carried out a lot of game testing as I wrote the game, confirming behaviour and outcomes with temporary print statements.
 * Tested on the Heroku terminal as I set up automatic deployment so I was able to see exactly how the game was generated.
 
  ## Compatibility
