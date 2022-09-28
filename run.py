@@ -234,10 +234,10 @@ def play_a_round(active_player):
             print(CARD_IMAGES[card])
         requested_card = input("\nWhich card do you want to request?\n")
         card_check = any(card.startswith(
-            f"{requested_card}") for card in computer_hand)
+            requested_card) for card in computer_hand)
         if card_check is True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (
-                f"{requested_card}") not in x, computer_hand)))
+                requested_card) not in x, computer_hand)))
             requested_card = hand_over_requested_card(
                 requested_card_index, active_player)
             requested_card = add_card_to_player_hand(
@@ -253,6 +253,8 @@ def play_a_round(active_player):
                 print("You are taking another card from the deck\n")
                 time.sleep(2)
                 selected_card = pull_card_from_deck()
+                print(f"You pulled a {selected_card} from the deck")
+                time.sleep(2)
                 add_card_to_player_hand(selected_card, active_player)
                 requested_card = determine_pulled_card_value(selected_card)
                 requested_card_value = check_player_hand_for_foak(
@@ -270,11 +272,11 @@ def play_a_round(active_player):
         time.sleep(0.5)
 
         card_check = any(card.startswith(
-            f"{requested_card}") for card in user_hand)
+            requested_card) for card in user_hand)
 
         if card_check is True:
             requested_card_index = len(tuple(itertools.takewhile(lambda x: (
-                f"{requested_card}") not in x, user_hand)))
+                requested_card) not in x, user_hand)))
             requested_card = hand_over_requested_card(
                 requested_card_index, active_player)
             requested_card = add_card_to_player_hand(

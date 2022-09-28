@@ -64,10 +64,12 @@ As this is a childrens game, the interface and the game format is kept simple.
 1. As a new visitor, I want to easily navigate the terminal to play the game.
 * Once the user has read the rules, they only need to press `Enter` in order to start the game.
 * The user then receives a notice that the cards are being dealt, as well as a list of the cards they now hold in their hand.
+
 ![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/ee4d6a689fa2f92590f4253900d059ebf3f559e5/docs/images/readme-images/card-dealing.webp)
 
 2. As a visitor, I want to challenge myself to try and beat the computer.
 * The player does not know what cards the Computer holds, but because the computer and the player can only request a card to a value of at least one of the cards they already hold, the player can infer what cards the computer has, based on past requests from the computer.
+
 ![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/ee4d6a689fa2f92590f4253900d059ebf3f559e5/docs/images/readme-images/infer-computer-cards.webp)
 
  ### Additional Testing
