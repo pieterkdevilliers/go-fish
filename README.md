@@ -2,41 +2,39 @@
 
 [View the live project here.](https://go-fish-ci.herokuapp.com/)
 
-![](https://github.com/pieterkdevilliers/workspace/go-fish/docs/images/readme_images/responsive.webp)
+![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme_images/responsive.webp)
 The image is from [Am I responsive?](http://ami.responsivedesign.is/)
 
-Story Vault is a terminal-based story generator designed mainly for children 7 years and up. It was designed to provide a fun environment in which the children can create stories very much like Madlibs. They select words provided from the terminal and the story is created for them. They can play as much as they like until they decide to end the game.
+Go Fish is a terminal based card game aimed at children 6 years and above.
 
 ## UX
 I aimed to create a story generator game for children that is fun and is very easy to manipulate and input data.
 
 #### The ideal client:
 * Children
-* Adults
 * English Speaking
-* Readers
-* People who like silly stories
+* Children who enjoy pattern matching games
 
 ### The game will help clients to:
 * Navigate easily through the terminal
-* Test their reading skills
-* Improve their imagination
+* Test their short term memory skills
 * Provide entertainment
 
 ## Owner Stories
-1. As the owner, I want the game to be fun and make the user to keep returning.
-2. As the owner, I want the game to be educational.
+1. As the owner, I want the game to be fun and simple to play.
+2. As the owner, I want the game to encourage the player to return for more games.
 3. As the owner, I want to show my new learned skills with Python.
 
 ### User Stories
-1. As a new visitor, I want to easily navigate the terminal to play the game.
-2. As a visitor, I want to be able to exit the game when I get tired of playing.
-3. As a visitor, I want to be create and read fun stories.
+1. As a new visitor, I want to easily navigate the terminal and play the game.
+2. As a visitor, I want to challenge myself to try and beat the computer.
 
 ## The skeleton
-The Game consists of only 1 page which is the terminal page. I am using Python to generate the data and create stories.
-* The terminal game is not responsive and is only 1 page therefore wireframes were not needed this time.
-![](https://github.com/MiaTothova/story-vault/blob/main/images/chart.png)
+The game consists of a single page terminal interface, generated with Python.
+* The inspiration for the project came from watching my daughters playing this as a real card game in a café in Paris. The sketches / wireframes below show the initial ideas I noted down as I watched them play.
+![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme-images/list_of_items.webp)
+
+![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme-images/flow_diagram.webp)
 
 ## The Scope
 To achieve my goal, I included the following features in my game:
