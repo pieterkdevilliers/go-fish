@@ -1,8 +1,8 @@
-# Story Vault
+# Go Fish
 
-[View the live project here.](https://story-vault.herokuapp.com/)
+[View the live project here.](https://go-fish-ci.herokuapp.com/)
 
-![](https://github.com/MiaTothova/story-vault/blob/main/images/responsive.png)
+![](https://github.com/pieterkdevilliers/workspace/go-fish/docs/images/readme_images/responsive.webp)
 The image is from [Am I responsive?](http://ami.responsivedesign.is/)
 
 Story Vault is a terminal-based story generator designed mainly for children 7 years and up. It was designed to provide a fun environment in which the children can create stories very much like Madlibs. They select words provided from the terminal and the story is created for them. They can play as much as they like until they decide to end the game.
