@@ -81,16 +81,14 @@ As this is a childrens game, the interface and the game format is kept simple.
 To ensure that a broad range of users can successfully view/use the site, I tested it across all major browsers on both desktop and mobile.
 * Chrome
 * Mozila Firefox
-* Edge
-* Internet explorer
 * Safari
-Although this is a web app it is visible on a mobile and tablets, even though it is not responsive.
+Whilst the app loads on mobile devices, interaction with the terminal is not possible.
 
 ## Validation
 ![](https://github.com/MiaTothova/story-vault/blob/main/images/pep8.png)
 
 ## Deployment
-This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/MiaTothova/story-vault)
+This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/pieterkdevilliers/go-fish)
 
 To deploy this page to Heroku from GitHub repository, the following steps were taken:
 
@@ -103,12 +101,12 @@ To deploy this page to Heroku from GitHub repository, the following steps were t
 8. After it has successfully deployed a 'view' button appeared which took me to my deployed app.
 
 ## Credits
-* With this project everything seemed pretty straightforward. 
-* I have used youtube and google search to look up inspirations on how to aproach a Madlib game. I have not copied or reused anyone else's code in this project. 
-* I have watched the following videos for inspiration:
-   1. [Mad Libs Game](https://www.youtube.com/watch?v=u7g9mRzQLYE&t=2s)
-   2. [Build a Mad Libs Generator](https://www.youtube.com/watch?v=vFNZvZSOqlY&t=2s)
-* [This site was used to get my templates for my stories](https://www.glowwordbooks.com/blog/category/kids-online-mad-libs/) 
-* [This website was used to get ASCII code for my images](https://www.asciiart.eu/)
-* My Mentor Guido Cecilio Garcia Bernal was extremely helpful in breaking all the steps down for me and answering any questions I had Especially in regards to the dictionary.
-* Kasia Bogucka our Cohort Facilitator was very hepful in answering questions and providing us with information from Code Institute.
+* Whilst the game itself is really simple, the underlying rules and possibilities of card options and card tracking in the deck, player hands and player Four Of A Kind proved to be a very interesting and enjoyable challenge. 
+* I used several google searches to find answers to different questions, taking care not to directly copy anyone's code for my project. Helpful articles I found were:
+   1. [Retrieving partial matches from a list of strings](https://stackoverflow.com/questions/64127075/how-to-retrieve-partial-matches-from-a-list-of-strings)
+   2. [Find all index position in list based on partial string inside item in list](https://stackoverflow.com/questions/14849293/find-all-index-position-in-list-based-on-partial-string-inside-item-in-list)
+   3. [How to get the first word in the string](https://stackoverflow.com/questions/13750265/how-to-get-the-first-word-in-the-string)
+   4. [How do I make a time delay?](https://stackoverflow.com/questions/510348/how-do-i-make-a-time-delay)
+   5. [How To Reference Nested Python Lists & Dictionaries](https://packetpushers.net/how-to-reference-nested-python-lists-dictionaries/)
+* This README documents structure is based on the one used by MiaTothova [here](https://github.com/MiaTothova/story-vault)
+* My Mentor Guido Cecilio Garcia Bernal was extremely helpful as always.

@@ -464,7 +464,7 @@ def report_scores(user_table, computer_table, deck, active_player,
     :param computer_hand: The list of cards in the computer's hand.
     """
     if user_hand != [] and computer_hand != []:
-        print("********************** SCORE REPORT *********************\n")
+        print("**********************  *********************\n")
         if len(user_table) != 0:
             print("\n")
             print("\n")
