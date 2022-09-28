@@ -32,9 +32,9 @@ I aimed to create a story generator game for children that is fun and is very ea
 ## The skeleton
 The game consists of a single page terminal interface, generated with Python.
 * The inspiration for the project came from watching my daughters playing this as a real card game in a café in Paris. The sketches / wireframes below show the initial ideas I noted down as I watched them play.
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme-images/list_of_items.webp)
+![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/313bb83a79a02dfc8d3dc4753537a5d2422c9ef4/docs/images/readme-images/list-of-items.webp)
 
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme-images/flow_diagram.webp)
+![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/313bb83a79a02dfc8d3dc4753537a5d2422c9ef4/docs/images/readme-images/flow-diagram.webp)
 
 ## The Scope
 To achieve my goal, I included the following features in my game:
