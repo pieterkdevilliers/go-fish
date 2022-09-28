@@ -128,6 +128,14 @@ def explain_game_rules():
     """
     Explain the rules of the game.
     """
+    print("    __          __  _                           ")
+    print("    \ \        / / | |                          ")
+    print("     \ \  /\  / /__| | ___ ___  _ __ ___   ___  ")
+    print("      \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \ ")
+    print("       \  /\  /  __/ | (_| (_) | | | | | |  __/ ")
+    print("        \/  \/ \   | |\___\___/| | | | | |\___| ")
+    print("                                                ")
+    time.sleep(2)
     print("Here are the rules of the game:\n")
     print("1 - The aim of the game is to end with the most Four Of A Kind")
     print("sets on the table and an empty hand.\n")
