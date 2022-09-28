@@ -58,7 +58,7 @@ As this is a childrens game, the interface and the game format is kept simple.
 * [Gitpod](https://gitpod.io/workspaces) - Used for writing the code and git management.
 * [Github](https://github.com/) - Used to host the repository.
 * [Heroku](https://id.heroku.com/login) - Used to host the live game.
-* [pep8online.com](http://pep8online.com/) To validate my code and check for errors
+* [pylint](https://pypi.org/project/pylint/) - Used to validate my code and check for errors.
 
 ## Testing
 1. As a new visitor, I want to easily navigate the terminal to play the game.
