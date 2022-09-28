@@ -162,8 +162,8 @@ def start_game():
 
 def deal_cards():
     """
-    Deals the cards by randomly selecting 7 cards for the user and 7 cards for\
-        the computer.
+    Deals the cards by randomly selecting 7 cards for the user and 7 cards for
+    the computer.
     This will remove them from the deck list and add 7 cards to the user_hand
     list and 7 cards to the computer_hand list
     """
@@ -246,7 +246,7 @@ def play_a_round(active_player):
                 requested_card, active_player)
             confirm_player_foak(requested_card, active_player)
             user_foak.clear()
-            
+
         else:
             if deck != []:
                 print("\nThe Computer doesn't have that card.")
@@ -302,7 +302,7 @@ def play_a_round(active_player):
                 print("\nThere are no more cards left in the deck.\n")
     report_scores(
         user_table, computer_table, deck, active_player, user_hand,
-        computer_hand, requested_card_value)          
+        computer_hand, requested_card_value)
 
 
 def hand_over_requested_card(requested_card_index, active_player):
@@ -447,7 +447,7 @@ def delete_foak_from_player_hand(foak_card_index, active_player):
     if active_player == "user":
         user_hand.pop(int(foak_card_index))
     else:
-        computer_hand.pop(int(foak_card_index))          
+        computer_hand.pop(int(foak_card_index))
 
 
 def report_scores(user_table, computer_table, deck, active_player,
@@ -476,7 +476,7 @@ def report_scores(user_table, computer_table, deck, active_player,
                     print(CARD_IMAGES[card])
                 print("**********************\n")
 
-        if len(computer_table) != 0:        
+        if len(computer_table) != 0:
             print("\n")
             print("\n")
             time.sleep(2)
