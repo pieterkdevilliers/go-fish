@@ -62,60 +62,6 @@ CARD_IMAGES = {
     "Queen of Spades": "Queen♠",
     "King of Spades": "King♠"
 }
-initial_deck = [
-            "Ace of Hearts",
-            "2 of Hearts",
-            "3 of Hearts",
-            "4 of Hearts",
-            "5 of Hearts",
-            "6 of Hearts",
-            "7 of Hearts",
-            "8 of Hearts",
-            "9 of Hearts",
-            "10 of Hearts",
-            "Jack of Hearts",
-            "Queen of Hearts",
-            "King of Hearts",
-            "Ace of Diamonds",
-            "2 of Diamonds",
-            "3 of Diamonds",
-            "4 of Diamonds",
-            "5 of Diamonds",
-            "6 of Diamonds",
-            "7 of Diamonds",
-            "8 of Diamonds",
-            "9 of Diamonds",
-            "10 of Diamonds",
-            "Jack of Diamonds",
-            "Queen of Diamonds",
-            "King of Diamonds",
-            "Ace of Clubs",
-            "2 of Clubs",
-            "3 of Clubs",
-            "4 of Clubs",
-            "5 of Clubs",
-            "6 of Clubs",
-            "7 of Clubs",
-            "8 of Clubs",
-            "9 of Clubs",
-            "10 of Clubs",
-            "Jack of Clubs",
-            "Queen of Clubs",
-            "King of Clubs",
-            "Ace of Spades",
-            "2 of Spades",
-            "3 of Spades",
-            "4 of Spades",
-            "5 of Spades",
-            "6 of Spades",
-            "7 of Spades",
-            "8 of Spades",
-            "9 of Spades",
-            "10 of Spades",
-            "Jack of Spades",
-            "Queen of Spades",
-            "King of Spades"
-            ]
 
 
 class Game:
@@ -241,7 +187,7 @@ class Game:
             self.user_hand.sort()
             for card in self.user_hand:
                 print(CARD_IMAGES[card])
-            requested_card = input("\nWhich card do you want to request?\n")
+            requested_card = (input("\nWhich card do you want to request?\n").capitalize())
             self.validate_input(requested_card)
             card_check = any(card.startswith(
                 requested_card) for card in self.computer_hand)
@@ -570,13 +516,80 @@ class Game:
         """
         Offers the player the chance to play again
         """
-        print("Click the `Run Program` button to play again")
+        print("Would you like to play another round?")
+        play_again_status = input("Enter 'Y' to play again or 'N' to exit the game")
+        if play_again_status == "Y":
+            main()
+        else:
+            print("        _____                  _ _                  ")
+            print("       / ____|                | | |                 ")
+            print("       | |  __  ___   ___   __| | |__  _   _  ___  ")
+            print("       | | |_ |/ _ \ / _ \ / _` | '_ \| | | |/ _ \ ")
+            print("       | |__| | (_) | (_) | (_| | |_) | |_| |  __/ ")
+            print("        \_____|\___/ \___/ \__,_|_.__/ \__, |\___| ")
+            print("                                          | |      ")
+            print("                                        __/ |      ")
+            print("                                       |___/       ")
 
 
 def main():
     """
     Runs the main functions of the game.
     """
+    initial_deck = [
+            "Ace of Hearts",
+            "2 of Hearts",
+            "3 of Hearts",
+            "4 of Hearts",
+            "5 of Hearts",
+            "6 of Hearts",
+            "7 of Hearts",
+            "8 of Hearts",
+            "9 of Hearts",
+            "10 of Hearts",
+            "Jack of Hearts",
+            "Queen of Hearts",
+            "King of Hearts",
+            "Ace of Diamonds",
+            "2 of Diamonds",
+            "3 of Diamonds",
+            "4 of Diamonds",
+            "5 of Diamonds",
+            "6 of Diamonds",
+            "7 of Diamonds",
+            "8 of Diamonds",
+            "9 of Diamonds",
+            "10 of Diamonds",
+            "Jack of Diamonds",
+            "Queen of Diamonds",
+            "King of Diamonds",
+            "Ace of Clubs",
+            "2 of Clubs",
+            "3 of Clubs",
+            "4 of Clubs",
+            "5 of Clubs",
+            "6 of Clubs",
+            "7 of Clubs",
+            "8 of Clubs",
+            "9 of Clubs",
+            "10 of Clubs",
+            "Jack of Clubs",
+            "Queen of Clubs",
+            "King of Clubs",
+            "Ace of Spades",
+            "2 of Spades",
+            "3 of Spades",
+            "4 of Spades",
+            "5 of Spades",
+            "6 of Spades",
+            "7 of Spades",
+            "8 of Spades",
+            "9 of Spades",
+            "10 of Spades",
+            "Jack of Spades",
+            "Queen of Spades",
+            "King of Spades"
+            ]
     game = Game(initial_deck=initial_deck)
     game.explain_game_rules()
     print("\n")
