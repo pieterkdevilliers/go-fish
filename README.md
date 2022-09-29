@@ -91,7 +91,7 @@ I used three different linters to check my code. All three gave the same error, 
 ![Extends Class](docs/images/readme-images/extends_class.webp)
 
 ## Deployment
-This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/pieterkdevilliers/go-fish)
+This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can [clone this repository here](https://github.com/pieterkdevilliers/go-fish)
 
 To deploy this page to Heroku from GitHub repository, the following steps were taken:
 
@@ -111,5 +111,5 @@ To deploy this page to Heroku from GitHub repository, the following steps were t
    3. [How to get the first word in the string](https://stackoverflow.com/questions/13750265/how-to-get-the-first-word-in-the-string)
    4. [How do I make a time delay?](https://stackoverflow.com/questions/510348/how-do-i-make-a-time-delay)
    5. [How To Reference Nested Python Lists & Dictionaries](https://packetpushers.net/how-to-reference-nested-python-lists-dictionaries/)
-* This README documents structure is based on the one used by MiaTothova [here](https://github.com/MiaTothova/story-vault)
+* This README documents structure, including the Welcome and Goodbye message is based on the one used [by MiaTothova here](https://github.com/MiaTothova/story-vault)
 * My Mentor Guido Cecilio Garcia Bernal was extremely helpful as always.
