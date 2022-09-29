@@ -43,7 +43,7 @@ The includes the following features:
 1. A welcome message explaining the rules of the game.
 2. Simple in-game notifications confirming who's run it is, what cards are held and requested.
 3. In-game score report, showing the status of each player's Four Of A Kind table.
-4. The user can easily play another game by clicking the `Run Program` button in the interface.
+4. The user is offered the opportunity to play another game at the end of an active game.
 
 ### Future features
 In the future I would like to add the following features:
