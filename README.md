@@ -81,11 +81,13 @@ As this is a childrens game, the interface and the game format is kept simple.
 To ensure that a broad range of users can successfully view/use the site, I tested it across all major browsers on both desktop and mobile.
 * Chrome
 * Mozila Firefox
-* Safari
 Whilst the app loads on mobile devices, interaction with the terminal is not possible.
+* A note on Safari: The interface loads in MacOS Safari, but the terminal interface is unresponsive. As I was not responsible for creating the interface, I did not try to rectify this issue.
 
 ## Validation
-![](https://github.com/MiaTothova/story-vault/blob/main/images/pep8.png)
+![Infoheap](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
+![Tutorialspoint](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
+![Extends Class](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
 
 ## Deployment
 This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/pieterkdevilliers/go-fish)
