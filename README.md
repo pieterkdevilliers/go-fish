@@ -85,9 +85,10 @@ Whilst the app loads on mobile devices, interaction with the terminal is not pos
 * A note on Safari: The interface loads in MacOS Safari, but the terminal interface is unresponsive. As I was not responsible for creating the interface, I did not try to rectify this issue.
 
 ## Validation
-![Infoheap](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
-![Tutorialspoint](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
-![Extends Class](https://github.com/pieterkdevilliers/go-fish/blob/main/docs/images/readme-images/infoheap.webp)
+I used three different linters to check my code. All three gave the same error, relating to the syntax for an f-string. As there is no actual error in the sysntax for this f-string, I conclude that the python version in the linter is an older version, before f-strings were released.
+![Infoheap](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/infoheap.webp)
+![Tutorialspoint](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/tutorialspoint.webp)
+![Extends Class](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/extends_class.webp)
 
 ## Deployment
 This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/pieterkdevilliers/go-fish)
