@@ -517,8 +517,8 @@ class Game:
         Offers the player the chance to play again
         """
         print("Would you like to play another round?")
-        play_again_status = input("Enter 'Y' to play again or 'N' to exit the game")
-        if play_again_status == "Y":
+        play_again_status = input("Enter 'Y' to play again or 'N' to exit.")
+        if play_again_status.capitalize() == "Y":
             main()
         else:
             print("        _____                  _ _                  ")
