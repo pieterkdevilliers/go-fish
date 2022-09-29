@@ -2,7 +2,7 @@
 
 [View the live project here.](https://go-fish-ci.herokuapp.com/)
 
-![](docs/images/readme_images/responsive.webp)
+![](docs/images/readme-images/responsive.webp)
 The image is from [Am I responsive?](http://ami.responsivedesign.is/)
 
 Go Fish is a terminal based card game aimed at children 6 years and above.
