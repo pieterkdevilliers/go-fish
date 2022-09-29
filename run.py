@@ -93,7 +93,7 @@ class Game:
         print("1 - The aim of the game is to end with the most Four Of A Kind")
         print("sets on the table and an empty hand.\n")
         print("2 - You and the computer will take turns in asking each other")
-        print("for acard value. NOTE: You only request the card value,")
+        print("for a card value. NOTE: You only request the card value,")
         print("NOT the card suit.\n")
         print("Example: If you want to know if the computer holds a 7,")
         print("you only request 7, not 7 of Hearts  or Queen and not")
