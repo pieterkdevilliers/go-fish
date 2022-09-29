@@ -2,7 +2,7 @@
 
 [View the live project here.](https://go-fish-ci.herokuapp.com/)
 
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/17dff123f7ca0ffd58b6cc24f609179bf81a2659/docs/images/readme_images/responsive.webp)
+![](docs/images/readme_images/responsive.webp)
 The image is from [Am I responsive?](http://ami.responsivedesign.is/)
 
 Go Fish is a terminal based card game aimed at children 6 years and above.
@@ -32,9 +32,9 @@ I aimed to create a story generator game for children that is fun and is very ea
 ## The skeleton
 The game consists of a single page terminal interface, generated with Python.
 * The inspiration for the project came from watching my daughters playing this as a real card game in a café in Paris. The sketches / wireframes below show the initial ideas I noted down as I watched them play.
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/313bb83a79a02dfc8d3dc4753537a5d2422c9ef4/docs/images/readme-images/list-of-items.webp)
+![](docs/images/readme-images/list-of-items.webp)
 
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/313bb83a79a02dfc8d3dc4753537a5d2422c9ef4/docs/images/readme-images/flow-diagram.webp)
+![](docs/images/readme-images/flow-diagram.webp)
 
 ## The Scope
 The includes the following features:
@@ -65,12 +65,12 @@ As this is a childrens game, the interface and the game format is kept simple.
 * Once the user has read the rules, they only need to press `Enter` in order to start the game.
 * The user then receives a notice that the cards are being dealt, as well as a list of the cards they now hold in their hand.
 
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/ee4d6a689fa2f92590f4253900d059ebf3f559e5/docs/images/readme-images/card-dealing.webp)
+![](docs/images/readme-images/card-dealing.webp)
 
 2. As a visitor, I want to challenge myself to try and beat the computer.
 * The player does not know what cards the Computer holds, but because the computer and the player can only request a card to a value of at least one of the cards they already hold, the player can infer what cards the computer has, based on past requests from the computer.
 
-![](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/ee4d6a689fa2f92590f4253900d059ebf3f559e5/docs/images/readme-images/infer-computer-cards.webp)
+![](docs/images/readme-images/infer-computer-cards.webp)
 
  ### Additional Testing
 * I used the pep8online linter to review my code and highlight issues.
@@ -86,9 +86,9 @@ Whilst the app loads on mobile devices, interaction with the terminal is not pos
 
 ## Validation
 I used three different linters to check my code. All three gave the same error, relating to the syntax for an f-string. As there is no actual error in the sysntax for this f-string, I conclude that the python version in the linter is an older version, before f-strings were released.
-![Infoheap](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/infoheap.webp)
-![Tutorialspoint](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/tutorialspoint.webp)
-![Extends Class](https://raw.githubusercontent.com/pieterkdevilliers/go-fish/85201c088ec67a7980ba74b2741a776db7f7d85a/docs/images/readme-images/extends_class.webp)
+![Infoheap](docs/images/readme-images/infoheap.webp)
+![Tutorialspoint](docs/images/readme-images/tutorialspoint.webp)
+![Extends Class](docs/images/readme-images/extends_class.webp)
 
 ## Deployment
 This project was developed using Heroku, committed to git and pushed to GitHub using git commands. You can clone this repository [Here](https://github.com/pieterkdevilliers/go-fish)

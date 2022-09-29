@@ -119,7 +119,9 @@ initial_deck = [
 
 
 class Game:
-    
+    """
+    Runs the whole game.
+    """
     def __init__(self, initial_deck):
         self.deck = initial_deck
         self.user_hand = []
@@ -146,17 +148,17 @@ class Game:
         print("sets on the table and an empty hand.\n")
         print("2 - You and the computer will take turns in asking each other")
         print("for acard value. NOTE: You only request the card value,")
-        print("NOT the card suit.")
+        print("NOT the card suit.\n")
         print("Example: If you want to know if the computer holds a 7,")
         print("you only request 7, not 7 of Hearts  or Queen and not")
         print("Queen of Diamonds etc...\n")
-        print("3 - If the other player has the card requested, then it is handed")
-        print("over and the player requests another card.\n")
+        print("3 - If the other player has the card requested, then it is")
+        print("handed over and the player requests another card.\n")
         print("4 - If the other player does not have the requested card, the")
         print("active player draws a card from the deck,")
         print("and the other player has the next turn.\n")
-        print("5 - The winner is the first player with an empty hand, provided")
-        print("that player also has the highest number of")
+        print("5 - The winner is the first player with an empty hand,")
+        print("provided that player also has the highest number of")
         print("Four Of A Kind sets on the table.\n")
         self.start_game()
 
@@ -173,10 +175,10 @@ class Game:
 
     def deal_cards(self):
         """
-        Deals the cards by randomly selecting 7 cards for the user and 7 cards for
-        the computer.
-        This will remove them from the deck list and add 7 cards to the user_hand
-        list and 7 cards to the computer_hand list
+        Deals the cards by randomly selecting 7 cards for the user and 7 cards
+        for the computer.
+        This will remove them from the deck list and add 7 cards to the
+        user hand list and 7 cards to the computer_hand list
         """
         print("\nCards are being dealt\n")
         time.sleep(2)
@@ -240,11 +242,12 @@ class Game:
             for card in self.user_hand:
                 print(CARD_IMAGES[card])
             requested_card = input("\nWhich card do you want to request?\n")
+            self.validate_input(requested_card)
             card_check = any(card.startswith(
                 requested_card) for card in self.computer_hand)
             if card_check is True:
-                requested_card_index = len(tuple(itertools.takewhile(lambda x: (
-                    requested_card) not in x, self.computer_hand)))
+                requested_card_index = len(tuple(itertools.takewhile(lambda x:
+                    (requested_card) not in x, self.computer_hand)))
                 requested_card = self.hand_over_requested_card(
                     requested_card_index, active_player)
                 requested_card = self.add_card_to_player_hand(
@@ -284,8 +287,9 @@ class Game:
                 requested_card) for card in self.user_hand)
 
             if card_check is True:
-                requested_card_index = len(tuple(itertools.takewhile(lambda x: (
-                    requested_card) not in x, self.user_hand)))
+                requested_card_index = len(tuple(itertools.takewhile(lambda x:
+                                           (requested_card) not in x,
+                                           self.user_hand)))
                 requested_card = self.hand_over_requested_card(
                     requested_card_index, active_player)
                 requested_card = self.add_card_to_player_hand(
@@ -298,7 +302,7 @@ class Game:
             else:
                 if self.deck != []:
                     print("\nYou didn't have that card.")
-                    print("The computer is taking another card from the deck\n")
+                    print("The computer is taking a card from the deck\n")
                     time.sleep(2)
                     selected_card = self.pull_card_from_deck()
                     self.add_card_to_player_hand(selected_card, active_player)
@@ -312,6 +316,32 @@ class Game:
                 else:
                     print("\nThere are no more cards left in the deck.\n")
         self.report_scores(active_player, requested_card_value)
+
+    def validate_input(self, requested_card):
+        """
+        Receives the user input and validates it.
+        :param requested_card: The input received from the user
+        """
+        valid_inputs = ["2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "Jack",
+                        "Queen",
+                        "King",
+                        "Ace"]
+        if (requested_card.capitalize()) not in valid_inputs:
+            print(requested_card.capitalize())
+            print(f"{requested_card} is not a valid option. Choose again")
+            requested_card = input("\nWhich card do you want to request?\n")
+            self.validate_input(requested_card)
+        else:
+            return requested_card
 
     def hand_over_requested_card(self, requested_card_index, active_player):
         """
@@ -376,8 +406,8 @@ class Game:
         """
         Updates foak list with request card matches from player's
         hand and adds to the temp foak list.
-        :param requested_card: Name and value of the card added to the player hand.
-        Ex: 3 of Hearts.
+        :param requested_card: Name and value of the card added to the player
+        hand. Ex: 3 of Hearts.
         :param active_player: The player who's turn it is, user or computer.
         """
         requested_card_value = (requested_card.split(maxsplit=1)[0])
@@ -483,8 +513,8 @@ class Game:
                 print("\n")
                 print("\n")
                 time.sleep(2)
-                print(f"The computer has {len(self.computer_table)} on the table as")
-                print("it's Four Of A Kinds.\n")
+                print(f"The computer has {len(self.computer_table)} on the")
+                print("table as it's Four Of A Kinds.\n")
                 print("\n")
                 print("The computer's Four Of A Kinds are:")
                 for suit in self.computer_table:
@@ -500,7 +530,8 @@ class Game:
         """
         Determines the winner once one player has an empty hand by counting and
         comparing the number of foak for each player.
-        :param user_table: The list holding the Four Of A Kind lists for the user.
+        :param user_table: The list holding the Four Of A Kind lists for the
+        user.
         :param computer_table: The list holding the Four Of A Kind lists
         for the computer.
         :param user_hand: The list of cards in the user's hand.
